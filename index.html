@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Định hướng phát triển dự án E&amp;P tại nước ngoài 2026–2030 · Petrovietnam – PVEP</title>
+
+<!-- Fonts: Sora (display) + Be Vietnam Pro (body) — both ship a Vietnamese subset -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   THEME TOKENS  (PVEP brand · Light Executive)
+   Change these to re-skin the whole deck.
+   ============================================================ */
+:root{
+  /* PVEP brand */
+  --pvep-blue:#0083C7; --pvep-green:#00B050; --pvep-navy:#0A2A4A;
+  --ink-900:#1E293B; --ink-700:#334155; --ink-600:#475569; --ink-500:#64748B;
+  --bg-100:#F1F5F9; --white:#FFFFFF;
+  --danger:#DC2626; --warning:#EA580C; --caution:#D97706; --success:#15803D; --info:#1D4ED8;
+
+  /* Fonts */
+  --font-display:"Sora", system-ui, sans-serif;
+  --font-body:"Be Vietnam Pro", system-ui, sans-serif;
+
+  /* animated-components theme hooks → mapped to PVEP (LIGHT deck) */
+  --ac-accent:#0083C7; --ac-accent-2:#00B050; --ac-accent-3:#0A2A4A; --ac-accent-4:#1D4ED8;
+  --ac-fg:#1E293B; --ac-muted:#64748B;
+  --ac-track:rgba(10,42,74,.10); --ac-line:rgba(10,42,74,.14);
+  --ac-ease:cubic-bezier(.22,.8,.18,1); --ac-ease-bounce:cubic-bezier(.34,1.56,.64,1);
+  --ac-dur:.8s; --ac-stagger:80ms;
+
+  /* layout */
+  --rail:260px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ============================================================
+   viewport-base.css  (frontend-slides — MANDATORY, included in full)
+   ============================================================ */
+html, body{ height:100%; overflow-x:hidden; }
+html{ scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+.slide{
+  width:100vw; height:100vh; height:100dvh; overflow:hidden;
+  scroll-snap-align:start; display:flex; flex-direction:column; position:relative;
+}
+.slide-content{
+  flex:1; display:flex; flex-direction:column; justify-content:center;
+  max-height:100%; overflow:hidden; padding:var(--slide-padding);
+}
+:root{
+  --title-size:clamp(1.8rem, 6vh, 4rem);
+  --h2-size:clamp(1.5rem, 4.5vh, 3rem);
+  --h3-size:clamp(1.2rem, 3.5vh, 2.25rem);
+  --body-size:clamp(1.05rem, 2.8vh, 1.875rem);
+  --small-size:clamp(0.85rem, 2.2vh, 1.5rem);
+  --slide-padding:clamp(1.2rem, 4.5vh, 4.5rem);
+  --content-gap:clamp(0.8rem, 2.5vh, 2.5rem);
+  --element-gap:clamp(0.4rem, 1.5vh, 1.5rem);
+}
+.card,.container,.content-box{ max-width:min(95vw,1400px); max-height:min(88vh,850px); }
+.feature-list,.bullet-list{ gap:clamp(0.4rem,1vh,1rem); }
+.feature-list li,.bullet-list li{ font-size:var(--body-size); line-height:1.4; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:clamp(0.5rem,1.5vw,1rem); }
+img,.image-container{ max-width:100%; max-height:min(50vh,400px); object-fit:contain; }
+@media (max-height:700px){ :root{ --slide-padding:clamp(0.75rem,3vw,2rem); --content-gap:clamp(0.4rem,1.5vw,1rem); --title-size:clamp(1.25rem,4.5vw,2.5rem); --h2-size:clamp(1rem,3vw,1.75rem); } }
+@media (max-height:600px){ :root{ --slide-padding:clamp(0.5rem,2.5vw,1.5rem); --content-gap:clamp(0.3rem,1vw,0.75rem); --title-size:clamp(1.1rem,4vw,2rem); --body-size:clamp(0.7rem,1.2vw,0.95rem); } .nav-dots,.keyboard-hint,.decorative{ display:none; } }
+@media (max-height:500px){ :root{ --slide-padding:clamp(0.4rem,2vw,1rem); --title-size:clamp(1rem,3.5vw,1.5rem); --h2-size:clamp(0.9rem,2.5vw,1.25rem); --body-size:clamp(0.65rem,1vw,0.85rem); } }
+@media (max-width:600px){ :root{ --title-size:clamp(1.25rem,7vw,2.5rem); } .grid{ grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{ animation-duration:0.01ms!important; transition-duration:0.2s!important; } html{ scroll-behavior:auto; } }
+
+/* ============================================================
+   animation-core.css  (animated-components engine — included in full)
+   Animations are GATED on slide entry (.ac-on) so they replay.
+   ============================================================ */
+.ac-reveal{ opacity:0; }
+.ac-reveal--up{ transform:translateY(28px); }
+.ac-reveal--down{ transform:translateY(-28px); }
+.ac-reveal--left{ transform:translateX(-32px); }
+.ac-reveal--right{ transform:translateX(32px); }
+.ac-reveal--zoom{ transform:scale(.86); }
+.ac-on .ac-reveal{ animation:ac-fade-up var(--ac-dur) var(--ac-ease) both; animation-delay:calc(var(--i,0)*var(--ac-stagger) + var(--ac-delay,0ms)); }
+.ac-on .ac-reveal--left,.ac-on .ac-reveal--right{ animation-name:ac-fade-x; }
+.ac-on .ac-reveal--down{ animation-name:ac-fade-down; }
+.ac-on .ac-reveal--zoom{ animation-name:ac-zoom-in; animation-timing-function:var(--ac-ease-bounce); }
+@keyframes ac-fade-up{ from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:none;} }
+@keyframes ac-fade-down{ from{opacity:0;transform:translateY(-28px);} to{opacity:1;transform:none;} }
+@keyframes ac-fade-x{ from{opacity:0;} to{opacity:1;transform:none;} }
+@keyframes ac-zoom-in{ from{opacity:0;transform:scale(.86);} to{opacity:1;transform:scale(1);} }
+.ac-pop{ opacity:0; transform:scale(.4); }
+.ac-on .ac-pop{ animation:ac-pop var(--ac-dur) var(--ac-ease-bounce) both; animation-delay:calc(var(--i,0)*var(--ac-stagger) + var(--ac-delay,0ms)); }
+@keyframes ac-pop{ from{opacity:0;transform:scale(.4);} to{opacity:1;transform:scale(1);} }
+.ac-bar{ height:0; transition:height .9s var(--ac-ease); transition-delay:calc(var(--i,0)*var(--ac-stagger)); }
+.ac-on .ac-bar{ height:var(--h); }
+.ac-fill-x{ width:0; transition:width .9s var(--ac-ease); transition-delay:calc(var(--i,0)*var(--ac-stagger)); }
+.ac-on .ac-fill-x{ width:var(--w); }
+.ac-ring-val{ stroke-dasharray:var(--circ); stroke-dashoffset:var(--circ); transition:stroke-dashoffset 1.1s var(--ac-ease); transition-delay:calc(var(--i,0)*var(--ac-stagger)); }
+.ac-on .ac-ring-val{ stroke-dashoffset:calc(var(--circ)*(1 - var(--p))); }
+.ac-draw{ stroke-dasharray:var(--len); stroke-dashoffset:var(--len); }
+.ac-on .ac-draw{ animation:ac-draw 1.1s var(--ac-ease) forwards; animation-delay:calc(var(--i,0)*var(--ac-stagger)); }
+@keyframes ac-draw{ to{ stroke-dashoffset:0; } }
+.ac-area{ opacity:0; }
+.ac-on .ac-area{ animation:ac-fade .7s var(--ac-ease) forwards; animation-delay:calc(.5s + var(--i,0)*var(--ac-stagger)); }
+@keyframes ac-fade{ to{ opacity:1; } }
+.ac-float{ animation:ac-float 6s ease-in-out infinite; }
+@keyframes ac-float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.ac-spin{ animation:ac-spin 18s linear infinite; transform-origin:center; }
+@keyframes ac-spin{ to{ transform:rotate(360deg); } }
+.ac-drift{ animation:ac-drift 22s ease-in-out infinite alternate; }
+@keyframes ac-drift{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(4%,-3%) scale(1.08);} }
+.ac-shimmer{ background-size:200% 100%; animation:ac-shimmer 3.5s linear infinite; }
+@keyframes ac-shimmer{ to{ background-position:-200% 0; } }
+.ac-caret{ border-right:.08em solid var(--ac-accent); animation:ac-blink 1s steps(1) infinite; }
+@keyframes ac-blink{ 50%{ border-color:transparent; } }
+@media (prefers-reduced-motion:reduce){
+  .ac-reveal,.ac-pop,.ac-area{ opacity:1!important; transform:none!important; }
+  .ac-bar{ height:var(--h)!important; } .ac-fill-x{ width:var(--w)!important; }
+  .ac-ring-val{ stroke-dashoffset:calc(var(--circ)*(1 - var(--p)))!important; }
+  .ac-draw{ stroke-dashoffset:0!important; }
+  .ac-float,.ac-spin,.ac-drift,.ac-shimmer,.ac-caret{ animation:none!important; }
+  *{ transition-duration:.001s!important; }
+}
+
+/* ============================================================
+   GLOBAL LOOK  (light executive surface)
+   ============================================================ */
+body{
+  font-family:var(--font-body); color:var(--ink-600);
+  background:
+    radial-gradient(1100px 760px at 82% -12%, rgba(0,131,199,.10), transparent 60%),
+    radial-gradient(940px 680px at -8% 112%, rgba(0,176,80,.09), transparent 55%),
+    linear-gradient(135deg,#FFFFFF 0%, #EEF3F8 100%);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.wrap{ width:min(95%, 1650px); margin-inline:auto; position:relative; z-index:2; }
+.wrap--wide{ width:min(98%, 1850px); }
+@media (min-width:1000px){ .slide-content{ padding-left:calc(var(--slide-padding) + var(--rail)); } }
+
+.head-center{ text-align:center; display:flex; flex-direction:column; gap:.45rem; align-items:center; margin-bottom:clamp(.6rem,2.2vh,1.4rem); }
+.eyebrow{ font-family:var(--font-display); font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--pvep-blue); font-size:clamp(.62rem,1vw,.82rem); }
+.s-title{ font-family:var(--font-display); font-weight:800; color:var(--pvep-navy); font-size:clamp(1.4rem,3.6vw,2.7rem); line-height:1.08; letter-spacing:-.01em; }
+.s-title--sm{ font-size:clamp(1.2rem,2.8vw,2rem); }
+.neo{ color:var(--pvep-blue); } .neo-g{ color:var(--pvep-green); }
+
+/* ----- Left chapter rail ----- */
+.rail{
+  position:fixed; inset:0 auto 0 0; width:var(--rail); height:100vh; height:100dvh; z-index:50;
+  display:flex; flex-direction:column; justify-content:center; gap:.15rem; padding:1.4rem 1rem;
+  background:linear-gradient(180deg, rgba(255,255,255,.90), rgba(238,243,248,.86));
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-right:1px solid rgba(10,42,74,.10);
+}
+.rail__brand{ display:flex; align-items:center; gap:.55rem; margin-bottom:.2rem; }
+.rail__logo{ width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,var(--pvep-blue),var(--pvep-green)); display:grid; place-content:center; color:#fff; font-family:var(--font-display); font-weight:800; font-size:.8rem; box-shadow:0 6px 16px rgba(0,131,199,.3); }
+.rail__title{ font-family:var(--font-display); font-weight:800; color:var(--pvep-navy); font-size:.92rem; line-height:1; }
+.rail__sub{ font-size:.58rem; color:var(--ink-500); text-transform:uppercase; letter-spacing:.16em; margin:.15rem 0 1.1rem; }
+.rail__item{ display:flex; gap:.55rem; align-items:center; padding:.5rem .55rem; border-radius:10px; cursor:pointer; color:var(--ink-500); font-size:.74rem; font-weight:600; line-height:1.2; transition:color .25s, background .25s; }
+.rail__item .dot{ width:7px; height:7px; border-radius:50%; background:var(--ac-track); flex:none; transition:background .25s, box-shadow .25s; }
+.rail__num{ font-family:var(--font-display); font-weight:700; opacity:.45; font-size:.7rem; min-width:1.1em; }
+.rail__item:hover{ color:var(--ink-700); background:rgba(0,131,199,.06); }
+.rail__item.is-active{ color:var(--pvep-blue); background:rgba(0,131,199,.10); }
+.rail__item.is-active .dot{ background:var(--pvep-blue); box-shadow:0 0 0 4px rgba(0,131,199,.16); }
+.rail__item.is-active .rail__num{ opacity:1; color:var(--pvep-blue); }
+@media (max-width:999px){ .rail{ display:none; } }
+
+/* ----- Slide counter (top-right) + progress + hint ----- */
+.counter{ position:fixed; top:1.05rem; right:1.4rem; z-index:60; font-family:var(--font-display); font-weight:700; color:var(--pvep-navy); font-size:.95rem; letter-spacing:.03em; background:rgba(255,255,255,.72); padding:.32rem .8rem; border-radius:999px; border:1px solid rgba(10,42,74,.12); backdrop-filter:blur(6px); }
+.counter #cur{ color:var(--pvep-blue); } .counter .sep{ opacity:.4; margin:0 .18rem; }
+.progress{ position:fixed; top:0; left:0; height:3px; width:100%; z-index:61; background:transparent; }
+.progress__fill{ height:100%; width:0; background:linear-gradient(90deg,var(--pvep-blue),var(--pvep-green)); transition:width .45s var(--ac-ease); }
+.hint{ position:fixed; bottom:.9rem; right:1.4rem; z-index:55; font-size:.66rem; color:var(--ink-500); letter-spacing:.04em; }
+@media (max-width:999px){ .hint{ display:none; } }
+
+/* ----- Ambient background layer ----- */
+.ambient{ position:absolute; inset:0; overflow:hidden; z-index:0; pointer-events:none; }
+.ambient>*{ position:absolute; }
+.orb{ width:46vmax; height:46vmax; border-radius:50%; filter:blur(70px); opacity:.5; }
+.orb--1{ top:-16vmax; left:-8vmax; background:radial-gradient(circle,rgba(0,131,199,.34),transparent 70%); }
+.orb--2{ bottom:-18vmax; right:-12vmax; background:radial-gradient(circle,rgba(0,176,80,.30),transparent 70%); animation-delay:-8s; }
+.grid-glow{ inset:0; background-image:linear-gradient(var(--ac-line) 1px,transparent 1px),linear-gradient(90deg,var(--ac-line) 1px,transparent 1px); background-size:46px 46px; mask-image:radial-gradient(circle at 50% 42%,#000,transparent 72%); -webkit-mask-image:radial-gradient(circle at 50% 42%,#000,transparent 72%); opacity:.55; }
+
+/* ============================================================
+   SLIDE 1 — HERO
+   ============================================================ */
+.hero-particles{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+.hero__word{ font-family:var(--font-display); font-weight:800; line-height:.9; letter-spacing:-.03em; position:relative;
+  font-size:clamp(4.5rem,19vw,14rem);
+  background:linear-gradient(120deg,var(--pvep-navy) 0%,var(--pvep-blue) 45%,var(--pvep-green) 65%,var(--pvep-blue) 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.ac-on .hero__word{ animation:heroIn 1.3s var(--ac-ease-bounce) .08s both, textShine 5s linear 1.4s infinite; }
+@keyframes heroIn{ 0%{opacity:0;transform:scale(.5);filter:blur(26px)} 55%{opacity:1;filter:blur(0)} 80%{transform:scale(1.08)} 100%{opacity:1;transform:scale(1);filter:blur(0)} }
+.hero__amp{ font-family:var(--font-display); font-weight:700; color:var(--ink-700); font-size:clamp(1rem,3.4vw,2.2rem); letter-spacing:.04em; margin-top:.1rem; }
+.hero__tag{ color:var(--ink-600); font-size:clamp(.9rem,2vw,1.32rem); margin:1.3rem auto 0; max-width:44ch; min-height:1.7em; line-height:1.45; }
+.hero__by{ margin-top:1.5rem; color:var(--ink-500); font-size:clamp(.8rem,1.4vw,1rem); font-weight:600; }
+
+/* ============================================================
+   SLIDE 2 — Two viewpoints
+   ============================================================ */
+.two-view{ display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(.6rem,2vw,1.6rem); align-items:stretch; margin-top:clamp(.6rem,2.4vh,1.6rem); }
+.tv-col{ background:#fff; border:1px solid var(--ac-line); border-radius:18px; padding:clamp(1rem,2.4vw,1.8rem); box-shadow:0 12px 40px rgba(10,42,74,.06); }
+.tv-col--gov{ border-color:rgba(0,131,199,.35); box-shadow:0 16px 48px rgba(0,131,199,.12); }
+.tv-col__head{ display:flex; flex-direction:column; gap:.15rem; margin-bottom:1rem; padding-bottom:.8rem; border-bottom:1px dashed var(--ac-line); }
+.tv-tag{ font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-500); font-weight:700; }
+.tv-tag--g{ color:var(--pvep-blue); }
+.tv-col__head h3{ font-family:var(--font-display); font-size:clamp(1.1rem,2.6vw,1.85rem); color:var(--pvep-navy); font-weight:800; letter-spacing:.02em; }
+.tv-col--gov .tv-col__head h3{ color:var(--pvep-blue); }
+.tv-list{ list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.tv-list li{ font-size:var(--body-size); color:var(--ink-600); padding-left:1.4rem; position:relative; }
+.tv-list li::before{ content:""; position:absolute; left:0; top:.55em; width:8px; height:8px; border-radius:2px; background:var(--ink-500); }
+.tv-list--g li{ color:var(--ink-700); font-weight:500; }
+.tv-list--g li::before{ background:var(--pvep-green); border-radius:50%; }
+.tv-mid{ display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:clamp(1.6rem,4vw,3rem); color:var(--pvep-blue); font-weight:800; }
+
+/* ============================================================
+   SLIDE 3 — Why RACI matters  (legal chips + 3 blocks)
+   ============================================================ */
+.legal-chips{ display:flex; gap:.8rem; justify-content:center; margin:clamp(.7rem,2.4vh,1.5rem) 0; flex-wrap:wrap; }
+.chip{ font-family:var(--font-display); font-weight:700; font-size:clamp(.8rem,1.6vw,1.05rem); color:#fff; background:linear-gradient(135deg,var(--pvep-blue),var(--info)); padding:.5rem 1.1rem; border-radius:999px; box-shadow:0 8px 22px rgba(0,131,199,.28); }
+.tri{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(.8rem,2vw,1.4rem); }
+.tri__card{ background:#fff; border:1px solid var(--ac-line); border-top:4px solid var(--pvep-blue); border-radius:16px; padding:clamp(1rem,2.4vw,1.6rem); box-shadow:0 12px 36px rgba(10,42,74,.06); }
+.tri__card:nth-child(2){ border-top-color:var(--caution); }
+.tri__card:nth-child(3){ border-top-color:var(--pvep-green); }
+.tri__k{ display:block; font-family:var(--font-display); font-weight:800; color:var(--pvep-navy); font-size:clamp(1rem,2vw,1.35rem); margin-bottom:.5rem; }
+.tri__card p{ color:var(--ink-600); font-size:var(--body-size); line-height:1.45; }
+
+/* ============================================================
+   SLIDE 4A — OECD: approve → SUPERVISE
+   ============================================================ */
+.swap{ font-family:var(--font-display); font-weight:700; color:var(--ink-700); font-size:clamp(1.1rem,2.6vw,1.8rem); }
+.swap__old{ color:var(--ink-500); text-decoration-color:var(--danger); text-decoration-thickness:3px; opacity:.75; }
+.swap__new{ font-family:var(--font-display); font-weight:800; color:var(--pvep-blue); font-size:clamp(3rem,9vw,6.4rem); line-height:1; letter-spacing:.02em; margin:1rem 0 1.3rem; text-shadow:0 16px 42px rgba(0,131,199,.22); position:relative; }
+.ac-on .swap__new{ animation:boomIn 1.1s var(--ac-ease-bounce) .15s both, glowPulse 2.6s ease-in-out 1.2s infinite; }
+.quad4a{ display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem; max-width:780px; margin-inline:auto; }
+.mini{ background:#fff; border:1px solid var(--ac-line); border-left:4px solid var(--pvep-green); border-radius:12px; padding:.85rem 1.1rem; color:var(--ink-700); font-weight:500; font-size:var(--body-size); text-align:left; box-shadow:0 8px 24px rgba(10,42,74,.05); }
+
+/* ============================================================
+   SLIDE 4B / 12A — Icon cards
+   ============================================================ */
+.big4{ font-family:var(--font-display); font-weight:900; color:var(--pvep-blue); font-size:1.25em; }
+.cards{ display:grid; gap:clamp(.7rem,1.6vw,1.1rem); }
+.cards--4{ grid-template-columns:repeat(4,1fr); }
+.cards--3{ grid-template-columns:repeat(3,1fr); }
+.card4{ background:#fff; border:1px solid var(--ac-line); border-radius:16px; padding:clamp(1rem,2vw,1.4rem); box-shadow:0 12px 34px rgba(10,42,74,.06); transition:transform .3s, box-shadow .3s, border-color .3s; display:flex; flex-direction:column; gap:.5rem; }
+.card4:hover{ transform:translateY(-6px); border-color:var(--pvep-blue); box-shadow:0 22px 50px rgba(0,131,199,.18); }
+.card4__ic{ width:46px; height:46px; border-radius:12px; display:grid; place-content:center; background:linear-gradient(135deg,rgba(0,131,199,.13),rgba(0,176,80,.13)); color:var(--pvep-blue); transition:background 0.4s var(--ac-ease), color 0.4s var(--ac-ease), transform 0.4s var(--ac-ease-bounce), box-shadow 0.4s var(--ac-ease); }
+
+/* Global hover highlight cho các box */
+.tri__card, .dom, .mini, .duo__card, .kpis__item, .kpi, .card3, .step, .chip {
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.tri__card:hover, .dom:hover, .mini:hover, .duo__card:hover, .kpis__item:hover, .kpi:hover, .card3:hover, .step:hover, .chip:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(0,131,199,.18) !important;
+  border-color: var(--pvep-blue) !important;
+  z-index: 10;
+}
+.card4__ic svg{ width:26px; height:26px; transition:transform 0.4s var(--ac-ease-bounce); }
+.card4:hover .card4__ic{ background:linear-gradient(135deg,var(--pvep-blue),var(--pvep-green)); color:#fff; transform:scale(1.08); box-shadow:0 6px 16px rgba(0,131,199,.25); }
+.card4:hover .card4__ic svg{ transform:rotate(12deg) scale(1.15); }
+.card4 h4{ font-family:var(--font-display); color:var(--pvep-navy); font-weight:800; font-size:clamp(.95rem,1.8vw,1.2rem); }
+.card4 p{ color:var(--ink-600); font-size:var(--small-size); line-height:1.4; }
+@media (max-width:780px){ .cards--4{ grid-template-columns:repeat(2,1fr); } }
+
+/* ============================================================
+   SLIDE 5 — KSNB as supervisory arm
+   ============================================================ */
+.ksnb{ display:grid; grid-template-columns:auto 1fr; gap:clamp(1.4rem,4vw,3rem); align-items:center; margin-top:1rem; }
+.ksnb__diagram{ display:flex; flex-direction:column; align-items:center; }
+.ks-node{ font-family:var(--font-display); font-weight:800; border-radius:14px; padding:.9rem 1.6rem; font-size:clamp(1rem,2.2vw,1.5rem); }
+.ks-node--top{ background:var(--pvep-navy); color:#fff; box-shadow:0 12px 30px rgba(10,42,74,.25); }
+.ks-node--bot{ background:#fff; color:var(--pvep-blue); border:2px solid var(--pvep-blue); box-shadow:0 12px 30px rgba(0,131,199,.18); }
+.ks-link{ width:40px; height:clamp(54px,11vh,110px); }
+.ks-list{ list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+.ks-list li{ background:#fff; border:1px solid var(--ac-line); border-left:4px solid var(--pvep-blue); border-radius:12px; padding:.8rem 1.1rem; color:var(--ink-700); font-weight:500; font-size:var(--body-size); box-shadow:0 8px 22px rgba(10,42,74,.05); }
+
+/* ============================================================
+   SLIDE 6 — Challenges (domino) + punchline
+   ============================================================ */
+.domino{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:clamp(.4rem,1.2vw,.9rem); align-items:stretch; margin:clamp(.6rem,2vh,1.2rem) 0; }
+.domino:hover .dom{ transform:scale(0.92); opacity:0.5; filter:grayscale(80%); }
+.dom{ background:#fff; border:1px solid var(--ac-line); border-radius:14px; padding:clamp(.9rem,2vw,1.4rem); box-shadow:0 10px 30px rgba(10,42,74,.06); transition:transform .4s ease, opacity .4s ease, filter .4s ease, box-shadow .4s ease; }
+.domino .dom:hover{ transform:scale(1.08) translateY(-8px) !important; opacity:1 !important; filter:grayscale(0%) !important; z-index:20; box-shadow:0 25px 60px rgba(0,131,199,.25) !important; }
+.dom--bad{ border-color:rgba(220,38,38,.4); }
+.dom__k{ display:block; font-family:var(--font-display); font-weight:800; color:var(--pvep-navy); font-size:clamp(.95rem,1.9vw,1.3rem); margin-bottom:.4rem; }
+.dom--bad .dom__k{ color:var(--danger); }
+.dom p{ color:var(--ink-600); font-size:var(--small-size); line-height:1.4; }
+.dom__arr{ display:flex; align-items:center; color:var(--ink-500); font-size:clamp(1.2rem,3vw,2rem); font-family:var(--font-display); }
+.punch{ font-family:var(--font-display); font-weight:700; color:var(--pvep-navy); text-align:center; font-size:clamp(1.2rem,3.4vw,2.4rem); line-height:1.3; max-width:24ch; margin:clamp(.8rem,3vh,1.8rem) auto 0; font-style:italic; }
+.punch::before{ content:""; display:block; width:62px; height:4px; border-radius:99px; background:linear-gradient(90deg,var(--pvep-blue),var(--pvep-green)); margin:0 auto .9rem; }
+
+/* ============================================================
+   SLIDE 7 — Static → Dashboard (keystone)
+   ============================================================ */
+.ba{ display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(.8rem,2vw,1.6rem); align-items:center; margin-top:clamp(.5rem,2vh,1.1rem); }
+.ba__side{ background:#fff; border:1px solid var(--ac-line); border-radius:18px; padding:clamp(1rem,2.4vw,1.6rem); box-shadow:0 14px 40px rgba(10,42,74,.07); position:relative; min-height:clamp(280px,45vh,450px); display:flex; flex-direction:column; gap:.8rem; }
+.ba__before{ filter:saturate(.7); }
+.ba__after{ border-color:rgba(0,131,199,.35); box-shadow:0 18px 50px rgba(0,131,199,.14); }
+.ba__lbl{ font-family:var(--font-display); font-weight:800; letter-spacing:.14em; font-size:.72rem; text-transform:uppercase; }
+.ba__lbl--old{ color:var(--ink-500); } .ba__lbl--new{ color:var(--pvep-blue); }
+.doc-stack{ display:flex; gap:.5rem; align-items:flex-end; justify-content:center; flex:1; }
+.doc{ width:46px; height:62px; background:repeating-linear-gradient(0deg,#e2e8f0,#e2e8f0 2px,#fff 2px,#fff 8px); border:1px solid #cbd5e1; border-radius:4px; transform:rotate(-4deg); box-shadow:0 6px 14px rgba(10,42,74,.1); }
+.doc:nth-child(2){ transform:rotate(3deg) translateY(-4px); } .doc:nth-child(3){ transform:rotate(-1deg); }
+.ba__pts{ list-style:none; display:flex; flex-direction:column; gap:.35rem; }
+.ba__pts li{ font-size:var(--body-size); color:var(--ink-600); padding-left:1.2rem; position:relative; }
+.ba__pts li::before{ content:"–"; position:absolute; left:0; color:var(--ink-500); }
+.ba__pts--g li{ color:var(--ink-700); } .ba__pts--g li::before{ content:"✓"; color:var(--pvep-green); font-weight:700; }
+.ba__mid{ display:flex; align-items:center; justify-content:center; }
+.ba__arrow{ position:relative; width:clamp(72px,8vw,124px); height:46px; border-radius:999px; background:linear-gradient(90deg,var(--pvep-blue),var(--pvep-green)); display:grid; place-content:center; color:#fff; font-family:var(--font-display); font-weight:800; font-size:.68rem; letter-spacing:.1em; box-shadow:0 10px 26px rgba(0,131,199,.3); overflow:hidden; }
+.ba__arrow::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent); transform:translateX(-120%); }
+.ac-on .ba__arrow::after{ animation:sweepX 2.2s var(--ac-ease) infinite; animation-delay:.6s; }
+@keyframes sweepX{ to{ transform:translateX(120%); } }
+.mini-dash{ flex:1; display:flex; align-items:center; gap:1rem; justify-content:center; background:linear-gradient(135deg,rgba(0,131,199,.06),rgba(0,176,80,.05)); border-radius:12px; padding:1rem; }
+.md-bars{ display:flex; align-items:flex-end; gap:.4rem; height:clamp(100px,20vh,180px); }
+.md-bar{ width:14px; align-self:flex-end; border-radius:5px 5px 0 0; background:linear-gradient(180deg,var(--pvep-blue),#005f91); }
+.md-ring{ width:clamp(90px,12vw,150px); height:auto; transform:rotate(-90deg); }
+.md-track{ fill:none; stroke:var(--ac-track); stroke-width:12; }
+.md-val{ fill:none; stroke:var(--pvep-green); stroke-width:12; stroke-linecap:round; }
+
+/* ============================================================
+   SLIDE 8 — Power BI embed
+   ============================================================ */
+.pb-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; margin-bottom:.7rem; flex-wrap:wrap; }
+.pb-filters{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.fchip{ font-size:.74rem; font-weight:600; color:var(--pvep-blue); background:rgba(0,131,199,.10); border:1px solid rgba(0,131,199,.25); padding:.35rem .8rem; border-radius:999px; }
+.pb-frame{ background:#fff; border:1px solid var(--ac-line); border-radius:14px; overflow:hidden; box-shadow:0 22px 60px rgba(10,42,74,.16); height:clamp(350px,70vh,850px); display:flex; flex-direction:column; }
+.pb-frame__bar{ display:flex; align-items:center; gap:.5rem; padding:.5rem .9rem; background:#f1f5f9; border-bottom:1px solid var(--ac-line); }
+.pbdot{ width:11px; height:11px; border-radius:50%; }
+.pbdot:nth-child(1){ background:#f87171; } .pbdot:nth-child(2){ background:#fbbf24; } .pbdot:nth-child(3){ background:#34d399; }
+.pb-frame__url{ margin-left:.6rem; font-size:.74rem; color:var(--ink-500); }
+.pb-frame iframe{ flex:1; width:100%; border:0; background:#fff; }
+
+/* ============================================================
+   SLIDE 9 — Work breakdown tree
+   ============================================================ */
+.org{ text-align:center; margin-top:.6rem; }
+.org__node{ display:inline-block; padding:.7rem 1.2rem; border-radius:12px; color:var(--ink-700); background:#fff; border:1px solid var(--ac-line); font-weight:700; font-family:var(--font-display); box-shadow:0 8px 22px rgba(10,42,74,.06); font-size:clamp(.82rem,1.6vw,1.05rem); }
+.org__root{ background:var(--pvep-navy); color:#fff; border-color:var(--pvep-navy); }
+.org__children{ display:flex; justify-content:center; gap:clamp(.6rem,3vw,1.8rem); margin-top:2.4rem; position:relative; flex-wrap:wrap; }
+.org__children::before{ content:""; position:absolute; top:-1.2rem; left:12%; right:12%; height:2px; background:var(--ac-line); }
+.org__children .org__node{ position:relative; }
+.org__children .org__node::before{ content:""; position:absolute; top:-1.2rem; left:50%; width:2px; height:1.2rem; background:var(--ac-line); }
+.org__root::after{ content:""; display:block; width:2px; height:1.2rem; background:var(--ac-line); margin:.4rem auto -.4rem; }
+.map-row{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:clamp(1rem,3vh,1.8rem); }
+.map-chip{ font-size:.74rem; font-weight:600; padding:.4rem .9rem; border-radius:8px; }
+.map-chip--a{ color:var(--info); background:rgba(29,78,216,.1); }
+.map-chip--b{ color:var(--pvep-blue); background:rgba(0,131,199,.1); }
+.map-chip--c{ color:var(--success); background:rgba(21,128,61,.1); }
+.wb-flags{ display:flex; gap:.7rem; justify-content:center; margin-top:1rem; flex-wrap:wrap; }
+.flag{ font-family:var(--font-display); font-weight:700; font-size:clamp(.75rem,1.4vw,.95rem); padding:.5rem 1rem; border-radius:10px; }
+.flag--warn{ color:var(--warning); background:rgba(234,88,12,.10); border:1px solid rgba(234,88,12,.4); }
+.flag--over{ color:var(--danger); background:rgba(220,38,38,.10); border:1px solid rgba(220,38,38,.4); }
+.ac-on .ac-pulse{ animation:pulseWarn 1.4s ease-in-out infinite; }
+@keyframes pulseWarn{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.55; transform:scale(1.04); } }
+
+/* ============================================================
+   SLIDE 10 — 5 steps
+   ============================================================ */
+.steps5{ position:relative; padding:1.6rem .5rem 1rem; margin-top:.6rem; }
+.s5-track{ position:absolute; top:calc(1.6rem + 30px); left:9%; right:9%; height:5px; border-radius:99px; background:var(--ac-track); }
+.s5-fill{ display:block; height:100%; border-radius:999px; background:linear-gradient(90deg,var(--pvep-blue),var(--pvep-green)); }
+.s5{ position:relative; display:flex; justify-content:space-between; gap:.4rem; }
+.s5__step{ display:flex; flex-direction:column; align-items:center; gap:.55rem; flex:1; z-index:1; }
+.s5__step b{ width:clamp(46px,6vw,62px); height:clamp(46px,6vw,62px); border-radius:50%; display:grid; place-content:center; background:#fff; color:var(--pvep-blue); font-family:var(--font-display); font-weight:800; font-size:clamp(1.05rem,2.2vw,1.5rem); border:4px solid var(--pvep-blue); box-shadow:0 8px 22px rgba(0,131,199,.18); }
+.s5__step span{ color:var(--ink-700); font-size:clamp(.72rem,1.4vw,.95rem); font-weight:600; max-width:15ch; text-align:center; line-height:1.3; }
+.s5__step--hot b{ background:var(--pvep-green); border-color:var(--pvep-green); color:#fff; transform:scale(1.12); box-shadow:0 12px 30px rgba(0,176,80,.35); }
+.s5__step--hot span{ color:var(--success); }
+.note{ text-align:center; margin-top:clamp(.9rem,3vh,1.8rem); font-size:clamp(.74rem,1.3vw,.92rem); color:var(--caution); background:rgba(217,119,6,.08); border:1px dashed rgba(217,119,6,.4); border-radius:10px; padding:.7rem 1rem; max-width:74ch; margin-inline:auto; }
+.note--info{ color:var(--info); background:rgba(29,78,216,.07); border-color:rgba(29,78,216,.35); }
+
+/* ============================================================
+   SLIDE 11 / 12B — Two-block duo
+   ============================================================ */
+.duo{ display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(.8rem,2vw,1.6rem); align-items:center; margin:clamp(.7rem,2vh,1.4rem) 0; }
+.duo--2{ grid-template-columns:1fr 1fr; }
+.duo__card{ background:#fff; border:1px solid var(--ac-line); border-radius:18px; padding:clamp(1.1rem,2.6vw,2rem); box-shadow:0 14px 40px rgba(10,42,74,.07); }
+.duo__card--g{ border-color:rgba(0,176,80,.35); }
+.duo__no{ font-family:var(--font-display); font-size:clamp(1.6rem,3.4vw,2.4rem); color:var(--pvep-blue); font-weight:800; }
+.duo__card--g .duo__no{ color:var(--pvep-green); }
+.duo__card h3{ font-family:var(--font-display); color:var(--pvep-navy); font-weight:800; font-size:clamp(1.05rem,2.2vw,1.5rem); margin:.3rem 0 .5rem; }
+.duo__card p{ color:var(--ink-600); font-size:var(--body-size); line-height:1.45; }
+.duo__plus{ display:flex; flex-direction:column; align-items:center; gap:.35rem; font-family:var(--font-display); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--pvep-blue); }
+.rt-dot{ width:14px; height:14px; border-radius:50%; background:var(--pvep-green); }
+.ac-on .rt-dot{ animation:ping 1.6s ease-out infinite; }
+@keyframes ping{ 0%{ box-shadow:0 0 0 0 rgba(0,176,80,.5); } 100%{ box-shadow:0 0 0 16px rgba(0,176,80,0); } }
+.benefits{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-top:clamp(.9rem,3vh,1.8rem); }
+.ben{ font-family:var(--font-display); font-weight:700; font-size:clamp(.78rem,1.5vw,1rem); color:#fff; background:linear-gradient(135deg,var(--pvep-blue),var(--pvep-green)); padding:.5rem 1.1rem; border-radius:999px; box-shadow:0 8px 22px rgba(0,131,199,.2); }
+
+/* ============================================================
+   SLIDE 13 — Conclusion
+   ============================================================ */
+.end__lead{ font-size:var(--h3-size); color:var(--ink-700); line-height:1.4; }
+.end__lead b{ color:var(--pvep-navy); }
+.end__lead--2{ margin-top:.4rem; }
+.end__big{ font-family:var(--font-display); font-weight:800; font-size:clamp(1.8rem,6vw,4.4rem); line-height:1.28; padding:0.15em 0.1rem; letter-spacing:-.01em; margin:clamp(1.1rem,4vh,2.4rem) 0; position:relative;
+  background:linear-gradient(120deg,var(--pvep-navy),var(--pvep-blue) 45%,var(--pvep-green) 68%,var(--pvep-blue));
+  background-size:220% 100%;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.ac-on .end__big{ animation:boomIn 1.25s var(--ac-ease-bounce) .2s both, textShine 5s linear 1.5s infinite; }
+.end__thanks{ color:var(--ink-500); font-weight:600; font-size:clamp(.85rem,1.5vw,1.05rem); letter-spacing:.04em; }
+
+/* ============================================================
+   v2 ENHANCEMENTS — animated oil&gas bg · explosive FX · OECD · Claude
+   ============================================================ */
+
+/* ---- Global animated oil & gas background ---- */
+.oilbg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.oil-scene{ position:absolute; inset:0; width:100%; height:100%; opacity:.6; }
+.oil-pipe{ fill:none; stroke:rgba(0,131,199,.30); stroke-width:3; stroke-dasharray:10 16; animation:oilFlow 1.7s linear infinite; }
+.oil-pipe--g{ stroke:rgba(0,176,80,.32); animation-duration:2.3s; }
+@keyframes oilFlow{ to{ stroke-dashoffset:-26; } }
+.oil-line{ fill:none; stroke:rgba(10,42,74,.16); stroke-width:2; }
+.oil-line--b{ stroke:rgba(0,131,199,.24); }
+.oil-fill{ fill:rgba(0,131,199,.06); }
+.oil-fill--b{ fill:rgba(0,176,80,.18); }
+.oil-waves{ animation:oilWave 13s ease-in-out infinite alternate; }
+@keyframes oilWave{ 0%{transform:translateX(0)} 100%{transform:translateX(-30px)} }
+.bubbles{ position:absolute; inset:0; }
+.bub{ position:absolute; bottom:-24px; border-radius:50%; border:1.5px solid rgba(0,131,199,.30); background:radial-gradient(circle at 35% 30%,rgba(0,176,80,.18),transparent 70%); animation:bubRise linear infinite; }
+@keyframes bubRise{ 0%{transform:translateY(0) scale(.6);opacity:0} 12%{opacity:.85} 100%{transform:translateY(-98vh) scale(1.15);opacity:0} }
+.mol{ position:absolute; opacity:.5; color:rgba(0,131,199,.5); animation:molDrift 24s ease-in-out infinite alternate; }
+.mol--2{ animation-duration:30s; animation-delay:-6s; color:rgba(0,176,80,.5); }
+@keyframes molDrift{ 0%{transform:translate(0,0) rotate(0)} 100%{transform:translate(46px,-34px) rotate(50deg)} }
+.aurora{ position:absolute; border-radius:50%; filter:blur(85px); }
+.aurora--1{ width:56vmax; height:56vmax; top:-20vmax; left:-12vmax; opacity:.5; background:radial-gradient(circle, rgba(0,131,199,.32), transparent 66%); animation:auroraDrift 28s ease-in-out infinite alternate; }
+.aurora--2{ width:50vmax; height:50vmax; bottom:-18vmax; right:-10vmax; opacity:.42; background:radial-gradient(circle, rgba(0,176,80,.30), transparent 66%); animation:auroraDrift 34s ease-in-out infinite alternate-reverse; animation-delay:-9s; }
+@keyframes auroraDrift{ 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(6%,4%) scale(1.14)} }
+.blueprint{ position:absolute; inset:0; opacity:.5; background-image:radial-gradient(rgba(10,42,74,.13) 1px, transparent 1.5px); background-size:34px 34px; -webkit-mask-image:radial-gradient(ellipse at 50% 45%, #000 28%, transparent 78%); mask-image:radial-gradient(ellipse at 50% 45%, #000 28%, transparent 78%); }
+.oil-particles{ position:absolute; inset:0; width:100%; height:100%; opacity:.85; }
+.platform{ stroke-width:2.4; }
+.flare-flame{ transform-box:fill-box; transform-origin:center bottom; animation:flicker 1.5s ease-in-out infinite; }
+@keyframes flicker{ 0%,100%{ transform:scaleY(1) scaleX(1); opacity:.9 } 25%{ transform:scaleY(1.16) scaleX(.9); opacity:1 } 50%{ transform:scaleY(.9) scaleX(1.08); opacity:.78 } 75%{ transform:scaleY(1.1) scaleX(.95); opacity:.95 } }
+.flare-glow{ transform-box:fill-box; transform-origin:center; animation:flareGlow 1.5s ease-in-out infinite; }
+@keyframes flareGlow{ 0%,100%{ opacity:.3; transform:scale(1) } 50%{ opacity:.6; transform:scale(1.22) } }
+@media (prefers-reduced-motion:reduce){ .oil-pipe,.oil-waves,.bub,.aurora,.flare-flame,.flare-glow{ animation:none!important; } }
+
+/* ---- Explosive emphasis utilities ---- */
+.s-title{ position:relative; }
+.s-title::before{ content:""; position:absolute; left:50%; top:50%; width:140%; height:200%; transform:translate(-50%,-50%) scale(.25); border-radius:50%; background:radial-gradient(ellipse,rgba(0,131,199,.16),rgba(0,176,80,.06) 45%,transparent 72%); opacity:0; z-index:-1; pointer-events:none; }
+.ac-on .s-title::before{ animation:flashBurst 1.1s var(--ac-ease) .12s forwards; }
+.flash{ position:relative; }
+.flash::before{ content:""; position:absolute; left:50%; top:50%; width:130%; height:170%; transform:translate(-50%,-50%) scale(.2); border-radius:50%; background:radial-gradient(circle,rgba(0,131,199,.34),rgba(0,176,80,.12) 45%,transparent 70%); opacity:0; z-index:-1; pointer-events:none; }
+.ac-on .flash::before{ animation:flashBurst 1.25s var(--ac-ease) forwards; animation-delay:calc(var(--i,0)*var(--ac-stagger)); }
+@keyframes flashBurst{ 0%{opacity:0;transform:translate(-50%,-50%) scale(.2)} 35%{opacity:1} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)} }
+@keyframes textShine{ to{ background-position:220% 0; } }
+@keyframes boomIn{ 0%{opacity:0;transform:scale(.5);filter:blur(20px)} 55%{opacity:1;filter:blur(0)} 80%{transform:scale(1.07)} 100%{opacity:1;transform:scale(1)} }
+@keyframes glowPulse{ 0%,100%{text-shadow:0 0 0 rgba(0,131,199,0)} 50%{text-shadow:0 0 28px rgba(0,131,199,.55)} }
+.ac-on .glow{ animation:glowPulse 2.6s ease-in-out infinite; }
+
+/* shockwave + sparks (conclusion) */
+.shock{ position:absolute; left:50%; top:50%; width:46px; height:46px; border-radius:50%; border:3px solid var(--pvep-blue); transform:translate(-50%,-50%) scale(0); opacity:0; z-index:0; pointer-events:none; }
+.ac-on .shock{ animation:shockwave 2.8s var(--ac-ease) .3s infinite; }
+.shock--2{ border-color:var(--pvep-green); }
+.ac-on .shock--2{ animation:shockwave 2.8s var(--ac-ease) 1.2s infinite; }
+@keyframes shockwave{ 0%{transform:translate(-50%,-50%) scale(0);opacity:.6} 70%{opacity:.1} 100%{transform:translate(-50%,-50%) scale(24);opacity:0} }
+.sparks{ position:absolute; left:50%; top:44%; width:0; height:0; z-index:0; pointer-events:none; }
+.spark{ position:absolute; width:8px; height:8px; border-radius:50%; background:var(--pvep-green); opacity:0; }
+.spark:nth-child(even){ background:var(--pvep-blue); }
+.ac-on .spark{ animation:sparkFly 1.5s var(--ac-ease) .5s forwards; }
+@keyframes sparkFly{ 0%{opacity:0;transform:translate(0,0) scale(1.2)} 18%{opacity:1} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)} }
+
+/* ---- OECD watermark · reference · governance graph ---- */
+.oecd-wm{ position:absolute; right:clamp(.5rem,3vw,3rem); top:50%; transform:translateY(-50%); z-index:0; text-align:right; pointer-events:none; user-select:none; }
+.oecd-wm__txt{ display:block; font-family:var(--font-display); font-weight:800; font-size:clamp(4.5rem,15vw,12rem); line-height:.78; letter-spacing:.05em; color:rgba(0,131,199,.08); }
+.oecd-wm__sub{ display:block; font-family:var(--font-display); font-weight:700; letter-spacing:.34em; font-size:clamp(.55rem,1.3vw,.95rem); color:rgba(10,42,74,.16); margin-top:.4rem; }
+.oecd-ref{ display:inline-flex; align-items:center; gap:.4rem; margin-top:.7rem; font-size:clamp(.68rem,1.3vw,.85rem); font-weight:600; color:var(--pvep-blue); text-decoration:none; border:1px solid rgba(0,131,199,.3); background:rgba(0,131,199,.06); padding:.4rem .9rem; border-radius:999px; transition:background .2s, transform .2s; }
+.oecd-ref:hover{ background:rgba(0,131,199,.12); transform:translateY(-1px); }
+.govgraph{ position:absolute; left:clamp(.4rem,3vw,2.6rem); bottom:clamp(1rem,5vh,3rem); display:flex; align-items:flex-end; gap:6px; height:clamp(50px,9vh,88px); z-index:0; opacity:.9; pointer-events:none; }
+.gg-bar{ width:12px; align-self:flex-end; border-radius:4px 4px 0 0; background:linear-gradient(180deg,var(--pvep-blue),var(--pvep-green)); box-shadow:0 6px 16px rgba(0,131,199,.2); }
+@media (min-width:1000px){ .govgraph{ left:calc(var(--rail) + 1.4rem); } }
+/* card sparkline (slide 4B impressive graph icons) */
+.cardspark{ width:100%; height:22px; margin-top:auto; }
+/* ECG monitoring line (slide 5) */
+.ecg{ width:100%; height:clamp(40px,7vh,64px); margin-top:1rem; }
+
+/* ---- Claude (slide 11 AI card) ---- */
+.claude-row{ display:flex; align-items:center; gap:.7rem; margin-top:.9rem; }
+.claude-ic{ width:32px; height:32px; color:#D97757; display:grid; place-content:center; }
+.claude-ic svg{ width:28px; height:28px; }
+.ac-on .claude-ic{ animation:ac-spin 7s linear infinite; }
+.claude-btn{ font-family:var(--font-display); font-weight:700; font-size:.82rem; text-decoration:none; color:#fff; background:linear-gradient(135deg,#D97757,#BE5A38); padding:.45rem .95rem; border-radius:999px; box-shadow:0 8px 20px rgba(217,119,87,.38); transition:transform .2s, box-shadow .2s; }
+.claude-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(217,119,87,.5); }
+.ai-note{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; justify-content:center; margin-top:clamp(.9rem,3vh,1.8rem); max-width:82ch; margin-inline:auto; padding:.7rem 1.1rem; border-radius:12px; background:rgba(217,119,6,.08); border:1px dashed rgba(217,119,6,.4); font-size:var(--small-size); }
+.ai-note__txt{ color:var(--ink-600); }
+.ai-note__txt b{ color:#BE5A38; font-weight:800; }
+.claude-ic--sm{ width:24px; height:24px; }
+.claude-ic--sm svg{ width:22px; height:22px; }
+.claude-btn--sm{ font-size:.74rem; padding:.35rem .8rem; }
+
+/* ---- detailed bullet lists for content-rich slides ---- */
+.dlist{ list-style:none; display:flex; flex-direction:column; gap:.3rem; margin-top:.5rem; text-align:left; }
+.dlist li{ position:relative; padding-left:.95rem; font-size:var(--small-size); line-height:1.32; color:var(--ink-600); }
+.dlist li::before{ content:""; position:absolute; left:0; top:.52em; width:5px; height:5px; border-radius:50%; background:var(--pvep-blue); }
+.dlist--g li::before{ background:var(--pvep-green); }
+.dlist--bad li::before{ background:var(--danger); }
+/* Slide 3 tri-cards: denser, left-aligned to fit bullets */
+.tri__card{ padding:clamp(.8rem,1.8vw,1.2rem); display:flex; flex-direction:column; text-align:left; }
+.tri__k{ margin-bottom:.15rem; }
+/* Slide 5 four-up cards: tighten to fit detailed bullets */
+.cards--4 .card4{ padding:clamp(.8rem,1.5vw,1.1rem); gap:.35rem; }
+.cards--4 .card4__ic{ width:38px; height:38px; }
+.cards--4 .card4__ic svg{ width:22px; height:22px; }
+.cards--4 .card4 h4{ font-size:clamp(.82rem,1.5vw,1.05rem); }
+.cards--3 .card4 h4{ font-size:clamp(.92rem,1.7vw,1.18rem); }
+/* Slide 7 domino cards: stack header + bullets */
+.dom{ display:flex; flex-direction:column; }
+
+/* ============================================================
+   SLIDE 1 — Minimalist Technical Wind Power Background
+   ============================================================ */
+.hero-motion-bg {
+  position: absolute;
+  left: calc(var(--rail) + 3rem);
+  bottom: 3rem;
+  width: 240px;
+  height: 200px;
+  z-index: 2;
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+@media (max-width: 999px) {
+  .hero-motion-bg {
+    left: 2rem;
+  }
+}
+.tech-blueprint-scene {
+  width: 100%;
+  height: 100%;
+}
+
+.rotor-blades-tech {
+  animation: spinRotorSlow 30s linear infinite;
+}
+.rotor-blades-tech--slow {
+  animation: spinRotorSlow 40s linear infinite;
+  animation-delay: -15s;
+}
+@keyframes spinRotorSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.cable-flow-line {
+  animation: flowCable 2.5s linear infinite;
+}
+@keyframes flowCable {
+  to { stroke-dashoffset: -20; }
+}
+
+.beacon-light {
+  animation: beaconBlink 2s ease-in-out infinite;
+}
+@keyframes beaconBlink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ GLOBAL ANIMATED OIL & GAS BACKGROUND (all slides) ============ -->
+<div class="oilbg" aria-hidden="true">
+  <!-- soft animated gradient depth -->
+  <span class="aurora aurora--1"></span>
+  <span class="aurora aurora--2"></span>
+  <!-- engineering blueprint grid -->
+  <span class="blueprint"></span>
+  <!-- data particle network (all slides) -->
+  <canvas id="oilParticles" class="oil-particles"></canvas>
+  <!-- refined offshore scene -->
+  <svg class="oil-scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+    <!-- flowing pipelines -->
+    <path class="oil-pipe" d="M-60,212 H470 a18,18 0 0 1 18,18 V300 a18,18 0 0 0 18,18 H780"/>
+    <path class="oil-pipe oil-pipe--g" d="M1500,150 H1060 a18,18 0 0 0 -18,18 V300"/>
+    <!-- sea shimmer (slow drift) -->
+    <g class="oil-waves">
+      <path class="oil-line oil-line--b" d="M-80,734 q120,-22 240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0"/>
+      <path class="oil-line" d="M-80,764 q120,22 240,0 t240,0 t240,0 t240,0 t240,0 t240,0 t240,0" opacity=".5"/>
+    </g>
+    <!-- refined offshore platform (bottom-right) -->
+    <g class="platform oil-line oil-line--b" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- jacket legs -->
+      <path d="M1020,584 L1002,748 M1104,584 L1098,748 M1196,584 L1206,748 M1280,584 L1300,748"/>
+      <!-- cross bracing -->
+      <path d="M1020,584 L1098,748 M1104,584 L1002,748 M1104,584 L1206,748 M1196,584 L1098,748 M1196,584 L1300,748 M1280,584 L1206,748" opacity=".45"/>
+      <!-- deck -->
+      <path d="M996,560 H1306 V584 H996 Z" stroke-width="3"/>
+      <!-- derrick tower -->
+      <path d="M1040,560 L1062,432 L1090,432 L1112,560 M1052,500 H1100 M1046,468 H1106"/>
+      <line x1="1076" y1="432" x2="1076" y2="402" stroke-width="2"/>
+      <!-- crane -->
+      <path d="M1240,560 L1240,512 L1330,498"/>
+      <line x1="1330" y1="498" x2="1330" y2="520" stroke-width="2"/>
+      <!-- helideck -->
+      <ellipse cx="1010" cy="556" rx="34" ry="9" opacity=".7"/>
+      <!-- flare boom -->
+      <line x1="1300" y1="566" x2="1392" y2="500" stroke-width="3"/>
+    </g>
+    <!-- gas flare flame (flickers + glow) -->
+    <g class="flare">
+      <circle class="flare-glow" cx="1395" cy="486" r="30" fill="rgba(234,88,12,.32)"/>
+      <path class="flare-flame" d="M1392,466 c10,9 14,20 7,31 c-4,7 -16,7 -20,-1 c-6,-11 5,-21 13,-30 z" fill="rgba(234,88,12,.62)"/>
+      <path class="flare-flame" style="animation-delay:.25s" d="M1392,478 c5,5 7,12 3,18 c-3,5 -10,5 -12,-1 c-3,-7 3,-12 9,-17 z" fill="rgba(250,204,21,.8)"/>
+    </g>
+  </svg>
+  <!-- rising gas bubbles near the platform -->
+  <div class="bubbles">
+    <span class="bub" style="left:74%; width:9px;  height:9px;  animation-duration:11s; animation-delay:0s"></span>
+    <span class="bub" style="left:80%; width:14px; height:14px; animation-duration:14s; animation-delay:3s"></span>
+    <span class="bub" style="left:86%; width:8px;  height:8px;  animation-duration:10s; animation-delay:6s"></span>
+    <span class="bub" style="left:69%; width:12px; height:12px; animation-duration:13s; animation-delay:1.5s"></span>
+  </div>
+</div>
+
+<!-- progress bar -->
+<div class="progress"><div class="progress__fill" id="progressFill"></div></div>
+
+<!-- chapter rail -->
+<nav class="rail" aria-label="Chương">
+  <div class="rail__brand"><img src="LogoPVN_Original.png" style="height: 32px; width: auto; object-fit: contain;" alt="Petrovietnam Logo" /><span class="rail__title">ĐTRNN&nbsp;2026–2030</span></div>
+  <div class="rail__sub">Petrovietnam – PVEP · E&amp;P Roadmap</div>
+  <div class="rail__item" data-chapter="0" data-target="0"><span class="dot"></span><span class="rail__num">01</span>Bối cảnh &amp; Vị thế</div>
+  <div class="rail__item" data-chapter="1" data-target="4"><span class="dot"></span><span class="rail__num">02</span>Vướng mắc 2020–2025</div>
+  <div class="rail__item" data-chapter="2" data-target="9"><span class="dot"></span><span class="rail__num">03</span>Kết quả đạt được</div>
+  <div class="rail__item" data-chapter="3" data-target="12"><span class="dot"></span><span class="rail__num">04</span>Đề xuất 2026–2030</div>
+  <div class="rail__item" data-chapter="4" data-target="16"><span class="dot"></span><span class="rail__num">05</span>Kết luận</div>
+</nav>
+
+<!-- slide counter -->
+<div class="counter"><span id="cur">1</span><span class="sep">/</span><span id="tot">17</span></div>
+<div class="hint">← → chuyển slide · Home/End đầu/cuối</div>
+
+<!-- ========================= SLIDE 1 — HERO ========================= -->
+<section class="slide" data-chapter="0" style="background-color: #f8fafc;">
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg-wrap" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; background: #f8fafc;">
+    <video autoplay muted loop playsinline src="assets/offshore-motion.mp4" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: contrast(1.05) brightness(1.1); pointer-events: none;"></video>
+    <!-- Overlay blend từ trắng (trái) sang trong suốt/xanh biển (phải) -->
+    <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 15%, rgba(241,245,249,0.5) 50%, rgba(0,131,199,0.1) 100%);"></div>
+  </div>
+
+  <div class="slide-content" style="position: relative; z-index: 2;">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow ac-reveal" style="--i:0; color: #0284c7; letter-spacing: 0.15em; margin-bottom: 1.5rem; text-shadow: 0 2px 10px rgba(255,255,255,0.8);">THAM LUẬN PETROVIETNAM · 2026</div>
+      <h1 class="hero__word flash ac-reveal" style="--i:1" style="font-size:clamp(3rem,11vw,8rem);">ĐTRNN E&amp;P</h1>
+      <div class="hero__amp ac-reveal" style="--i:2; color: #0369a1; text-shadow: 0 4px 15px rgba(255,255,255,0.9); font-weight: 800;">ĐỊNH HƯỚNG 2026 – 2030</div>
+      <p class="hero__tag jtype" data-text="Lộ trình phối hợp Petrovietnam – PVEP" style="color: #334155; text-shadow: 0 2px 10px rgba(255,255,255,0.9); font-weight: 500;">&nbsp;</p>
+
+      <div class="hero__by ac-reveal" style="--i:4; color: #0f172a; text-shadow: 0 2px 10px rgba(255,255,255,0.9); opacity: 0.95; font-weight: 600;">Đoàn Thái Dương — Phó Trưởng Ban QLHĐ · Petrovietnam</div>
+      <div class="ac-reveal" style="--i:5; margin-top: 2rem;">
+        <a class="oecd-ref" href="#" style="color: #0369a1; border-color: rgba(3,105,161,0.3); background: rgba(255,255,255,0.65); backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">Hội thảo công tác Phát triển dự án mới ở nước ngoài</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 2 — Vai trò chiến lược ĐTRNN ========================= -->
+<section class="slide" data-chapter="0">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">PHẦN 1 · BỐI CẢNH &amp; VỊ THẾ</div>
+      <h2 class="s-title ac-reveal" style="--i:1">ĐTRNN <span class="neo">không phải lựa chọn</span> – là điều kiện cần</h2>
+    </div>
+    <div class="two-view">
+      <div class="tv-col tv-col--ops ac-reveal ac-reveal--left" style="--i:2">
+         <div class="tv-col__head"><span class="tv-tag">Bối cảnh trong nước</span><h3>SỨC ÉP</h3></div>
+         <ul class="tv-list">
+           <li>Trữ lượng dầu khí trong nước suy giảm</li>
+           <li>Sản lượng khai thác đi ngang, khó tăng trưởng</li>
+           <li>Cạnh tranh quốc tế ngày càng gay gắt</li>
+           <li>Yêu cầu an ninh năng lượng quốc gia</li>
+         </ul>
+      </div>
+      <div class="tv-mid ac-pop" style="--i:3">→</div>
+      <div class="tv-col tv-col--gov ac-reveal ac-reveal--right" style="--i:4">
+        <div class="tv-col__head"><span class="tv-tag tv-tag--g">Định vị chiến lược</span><h3>ĐTRNN E&amp;P</h3></div>
+        <ul class="tv-list tv-list--g">
+          <li>Bổ sung trữ lượng &amp; sản lượng cho Petrovietnam</li>
+          <li>Mở rộng địa bàn, đa dạng hóa rủi ro</li>
+          <li>Trụ cột Chiến lược Petrovietnam đến 2030, tầm nhìn 2050</li>
+          <li>Giữ vai trò Tập đoàn năng lượng quốc gia</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 3 — Danh mục dự án ĐTRNN hiện hữu ========================= -->
+<section class="slide" data-chapter="0">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Bức tranh danh mục ĐTRNN của PVEP</div>
+      <h2 class="s-title ac-reveal" style="--i:1"><span class="neo">07 dự án</span> · 4.394 triệu USD vốn cam kết</h2>
+    </div>
+    <div class="legal-chips">
+      <span class="chip ac-pop" style="--i:2">Algeria</span>
+      <span class="chip ac-pop" style="--i:3">Venezuela</span>
+      <span class="chip ac-pop" style="--i:4">Malaysia · Myanmar · Peru</span>
+    </div>
+    <div class="tri" style="position:relative;">
+      <!-- Diagram line connecting cards -->
+      <div class="diagram-line ac-reveal" style="--i:5; position:absolute; top:40px; left:10%; right:10%; height:2px; background:var(--pvep-blue); opacity:0.3; z-index:0; display:none;"></div>
+      <style>@media(min-width:768px){.diagram-line{display:block;}}</style>
+
+      <div class="tri__card ac-reveal ac-reveal--up" style="--i:6; position:relative; z-index:1; background:var(--white);">
+        <div class="icon-wrap" style="width:64px; height:64px; border-radius:50%; background:var(--bg-100); color:var(--pvep-blue); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:2px solid var(--pvep-blue);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <span class="tri__k">Dự án vận hành</span>
+        <ul class="dlist">
+          <li>Algeria – Lô 433a&amp;416b · sản lượng 17.000 thùng/ngày.</li>
+          <li>Dòng tiền ổn định, dự án sinh lợi nhuận.</li>
+          <li>Đã chuyển về nước 685,58 / 833,73 triệu USD doanh thu.</li>
+          <li>Là "viên gạch nền" cho danh mục ĐTRNN của PVEP.</li>
+        </ul>
+      </div>
+      <div class="tri__card ac-reveal ac-reveal--up" style="--i:7; position:relative; z-index:1; background:var(--white);">
+        <div class="icon-wrap" style="width:64px; height:64px; border-radius:50%; background:var(--bg-100); color:var(--warning); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:2px solid var(--warning);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        </div>
+        <span class="tri__k">Dự án giữ pháp lý</span>
+        <ul class="dlist">
+          <li>Junin 2 – Venezuela: bảo toàn tư cách pháp lý.</li>
+          <li>Không phát sinh rủi ro mới giai đoạn cấm vận.</li>
+          <li>Phối hợp Đại sứ quán &amp; tìm đối tác Minfra.</li>
+          <li>Chờ thời điểm tái khởi động khi điều kiện cho phép.</li>
+        </ul>
+      </div>
+      <div class="tri__card ac-reveal ac-reveal--up" style="--i:8; position:relative; z-index:1; background:var(--white);">
+        <div class="icon-wrap" style="width:64px; height:64px; border-radius:50%; background:var(--bg-100); color:var(--success); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:2px solid var(--success);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <span class="tri__k">Dự án đã thoái vốn</span>
+        <ul class="dlist dlist--g">
+          <li>Lô 39, Lô 67 (Peru) – kết thúc, bảo toàn vốn.</li>
+          <li>SK305, PM304 (Malaysia) – thoái vốn theo lộ trình.</li>
+          <li>M2 (Myanmar), XV (Campuchia), Danan (Iran).</li>
+          <li>Cắt lỗ kịp thời các dự án không hiệu quả.</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 4 — PVEP Dashboard Motion ========================= -->
+<section class="slide" data-chapter="0">
+  <div class="slide-content">
+    <div class="wrap">
+      <div class="head-center">
+        <div class="eyebrow ac-reveal" style="--i:0">Vị thế PVEP trong chuỗi giá trị Petrovietnam</div>
+        <h2 class="s-title ac-reveal" style="--i:1">PVEP — <span class="neo">nòng cốt E&amp;P</span> của Petrovietnam</h2>
+      </div>
+
+      <style>
+        /* Slide 4 — animated production dashboard */
+        .s4-grid{ display:grid; grid-template-columns: minmax(280px, 1.1fr) 1.6fr; gap:clamp(1rem,3vw,2.4rem); align-items:center; margin-top:clamp(.6rem,2.2vh,1.4rem); }
+        @media (max-width:900px){ .s4-grid{ grid-template-columns:1fr; } }
+
+        /* Left: pumpjack + circular ring */
+        .s4-stage{ position:relative; aspect-ratio:1/1; max-width:420px; margin-inline:auto; width:100%; }
+        .s4-ring-svg{ width:100%; height:100%; transform:rotate(-90deg); }
+        .s4-ring-track{ fill:none; stroke:rgba(10,42,74,.10); stroke-width:8; }
+        .s4-ring-val{ fill:none; stroke:url(#s4Grad); stroke-width:10; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 2s var(--ac-ease); }
+        .ac-on .s4-ring-val{ stroke-dashoffset:.675; }
+        .s4-ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+        .s4-pct{ font-family:var(--font-display); font-weight:800; font-size:clamp(2.4rem,7vw,4.6rem); line-height:1; background:linear-gradient(120deg,var(--pvep-navy),var(--pvep-blue) 50%,var(--pvep-green)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .s4-pct-sub{ font-family:var(--font-display); font-weight:700; color:var(--ink-600); font-size:clamp(.7rem,1.4vw,.95rem); letter-spacing:.14em; text-transform:uppercase; margin-top:.4rem; }
+
+        /* Pumpjack inside the ring */
+        .s4-pump{ position:absolute; left:50%; bottom:14%; transform:translateX(-50%); width:54%; height:auto; }
+        .s4-pump-beam{ transform-origin: 50% 50%; }
+        .ac-on .s4-pump-beam{ animation: s4PumpRock 2.6s ease-in-out infinite; }
+        @keyframes s4PumpRock{
+          0%,100%{ transform:rotate(-12deg); }
+          50%   { transform:rotate(12deg); }
+        }
+        .s4-pump-head{ transform-origin: 80% 50%; }
+        .ac-on .s4-pump-head{ animation: s4PumpHead 2.6s ease-in-out infinite; }
+        @keyframes s4PumpHead{
+          0%,100%{ transform:translateY(-3px); }
+          50%   { transform:translateY(8px); }
+        }
+        /* Oil drop ascending from rod */
+        .s4-drop{ opacity:0; }
+        .ac-on .s4-drop{ animation: s4DropUp 2.6s ease-in-out infinite; }
+        @keyframes s4DropUp{
+          0%{ opacity:0; transform:translateY(0); }
+          20%{ opacity:.9; }
+          80%{ opacity:.8; }
+          100%{ opacity:0; transform:translateY(-50px); }
+        }
+        .s4-drop--2{ animation-delay:.8s !important; }
+        .s4-drop--3{ animation-delay:1.6s !important; }
+
+        /* Right: 4 KPI cards with count-up + rising bars */
+        .s4-kpis{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(.7rem,1.6vw,1.1rem); }
+        .s4-card{ background:#fff; border:1px solid var(--ac-line); border-radius:16px; padding:clamp(.9rem,1.8vw,1.4rem); box-shadow:0 12px 34px rgba(10,42,74,.06); position:relative; overflow:hidden; transition:transform .3s, box-shadow .3s, border-color .3s; }
+        .s4-card:hover{ transform:translateY(-6px); border-color:var(--pvep-blue); box-shadow:0 22px 50px rgba(0,131,199,.18); }
+        .s4-card::after{ content:""; position:absolute; left:0; bottom:0; right:0; height:4px; background:linear-gradient(90deg,var(--pvep-blue),var(--pvep-green)); width:0; transition:width 1.2s var(--ac-ease) .3s; }
+        .ac-on .s4-card::after{ width:100%; }
+        .s4-card__lbl{ font-family:var(--font-display); font-weight:700; color:var(--ink-500); letter-spacing:.14em; text-transform:uppercase; font-size:clamp(.62rem,1vw,.78rem); margin-bottom:.4rem; }
+        .s4-card__val{ font-family:var(--font-display); font-weight:800; color:var(--pvep-navy); font-size:clamp(1.6rem,3.6vw,2.6rem); line-height:1.05; letter-spacing:-.01em; }
+        .s4-card__val .u{ color:var(--pvep-blue); font-size:.6em; margin-left:.15em; }
+        .s4-card__desc{ color:var(--ink-600); font-size:clamp(.78rem,1.2vw,.92rem); line-height:1.4; margin-top:.45rem; }
+        .s4-spark{ position:absolute; right:.7rem; top:.7rem; opacity:.7; }
+
+        /* Caption ribbon */
+        .s4-ribbon{ display:flex; flex-wrap:wrap; gap:.55rem; justify-content:center; margin-top:clamp(.8rem,2.4vh,1.4rem); }
+        .s4-pill{ font-family:var(--font-display); font-weight:700; font-size:clamp(.72rem,1.2vw,.9rem); color:#fff; background:linear-gradient(135deg,var(--pvep-blue),var(--pvep-green)); padding:.4rem 1rem; border-radius:999px; box-shadow:0 6px 16px rgba(0,131,199,.22); opacity:0; transform:translateY(10px); transition:opacity .6s var(--ac-ease), transform .6s var(--ac-ease); }
+        .ac-on .s4-pill{ opacity:1; transform:none; }
+        .ac-on .s4-pill:nth-child(1){ transition-delay:1.2s; }
+        .ac-on .s4-pill:nth-child(2){ transition-delay:1.4s; }
+        .ac-on .s4-pill:nth-child(3){ transition-delay:1.6s; }
+        .ac-on .s4-pill:nth-child(4){ transition-delay:1.8s; }
+      </style>
+
+      <div class="s4-grid">
+        <!-- LEFT: Pumpjack inside circular progress ring -->
+        <div class="s4-stage ac-reveal ac-reveal--zoom" style="--i:2">
+          <svg class="s4-ring-svg" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="s4Grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0083C7"/>
+                <stop offset="100%" stop-color="#00B050"/>
+              </linearGradient>
+            </defs>
+            <circle class="s4-ring-track" cx="100" cy="100" r="92" pathLength="1"/>
+            <circle class="s4-ring-val" cx="100" cy="100" r="92" pathLength="1"/>
+          </svg>
+
+          <!-- Pumpjack (SVG) inside ring -->
+          <svg class="s4-pump" viewBox="0 0 200 140" aria-hidden="true">
+            <!-- ground -->
+            <line x1="10" y1="128" x2="190" y2="128" stroke="#0A2A4A" stroke-width="2" opacity=".4"/>
+            <!-- base -->
+            <polygon points="40,128 70,128 60,108 50,108" fill="#0A2A4A" opacity=".85"/>
+            <!-- A-frame -->
+            <line x1="55" y1="108" x2="80" y2="60" stroke="#0A2A4A" stroke-width="3"/>
+            <line x1="55" y1="108" x2="105" y2="60" stroke="#0A2A4A" stroke-width="3"/>
+            <circle cx="92" cy="60" r="6" fill="#00B050"/>
+            <!-- Walking beam (rocks) -->
+            <g class="s4-pump-beam" style="transform-box: fill-box;">
+              <rect x="32" y="56" width="120" height="9" rx="2" fill="#0083C7"/>
+              <!-- horse head -->
+              <path d="M152,60 q14,-2 18,8 q-4,10 -18,12 z" fill="#0A2A4A"/>
+            </g>
+            <!-- Polished rod hanging from horse head -->
+            <g class="s4-pump-head">
+              <line x1="160" y1="68" x2="160" y2="118" stroke="#0A2A4A" stroke-width="2.5"/>
+              <rect x="156" y="118" width="8" height="6" fill="#0A2A4A"/>
+            </g>
+            <!-- Well casing -->
+            <rect x="152" y="124" width="16" height="6" fill="#0A2A4A" opacity=".8"/>
+            <!-- Crank wheel -->
+            <circle cx="60" cy="80" r="12" fill="none" stroke="#0083C7" stroke-width="2.5" class="ac-spin" style="transform-origin:60px 80px; transform-box: fill-box; animation-duration: 2.6s;"/>
+            <circle cx="60" cy="80" r="2" fill="#00B050"/>
+            <!-- Oil drops rising -->
+            <circle class="s4-drop" cx="160" cy="120" r="2.5" fill="#00B050"/>
+            <circle class="s4-drop s4-drop--2" cx="164" cy="120" r="2" fill="#0083C7"/>
+            <circle class="s4-drop s4-drop--3" cx="156" cy="120" r="2.2" fill="#00B050"/>
+          </svg>
+
+          <div class="s4-ring-center">
+            <div class="s4-pct"><span data-count-to="32.5" data-count-decimals="1" data-count-suffix="%" data-count-dur="1800">0%</span></div>
+            <div class="s4-pct-sub">Đóng góp sản lượng toàn Petrovietnam</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 4 KPI cards -->
+        <div class="s4-kpis">
+          <div class="s4-card ac-reveal ac-reveal--up" style="--i:3">
+            <svg class="s4-spark" width="42" height="18" viewBox="0 0 42 18" aria-hidden="true"><path class="ac-draw" pathLength="1" style="--len:1;--i:3" d="M2,14 L10,9 L18,12 L26,5 L34,8 L40,3" fill="none" stroke="var(--pvep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="s4-card__lbl">Vai trò</div>
+            <div class="s4-card__val">01<span class="u"> · E&amp;P</span></div>
+            <div class="s4-card__desc">Đơn vị chủ lực thăm dò – khai thác của Petrovietnam.</div>
+          </div>
+          <div class="s4-card ac-reveal ac-reveal--up" style="--i:4">
+            <svg class="s4-spark" width="42" height="18" viewBox="0 0 42 18" aria-hidden="true"><path class="ac-draw" pathLength="1" style="--len:1;--i:4" d="M2,12 L10,7 L18,10 L26,4 L34,7 L40,2" fill="none" stroke="var(--pvep-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="s4-card__lbl">Danh mục ĐTRNN</div>
+            <div class="s4-card__val"><span data-count-to="7" data-count-dur="1400">0</span><span class="u"> dự án</span></div>
+            <div class="s4-card__desc">07 dự án tại Algeria, Venezuela, Peru, Malaysia, Myanmar, Iran, Campuchia.</div>
+          </div>
+          <div class="s4-card ac-reveal ac-reveal--up" style="--i:5">
+            <svg class="s4-spark" width="42" height="18" viewBox="0 0 42 18" aria-hidden="true"><path class="ac-draw" pathLength="1" style="--len:1;--i:5" d="M2,14 L10,11 L18,8 L26,10 L34,5 L40,2" fill="none" stroke="var(--pvep-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="s4-card__lbl">Vốn cam kết</div>
+            <div class="s4-card__val"><span data-count-to="4394" data-count-dur="1800">0</span><span class="u"> triệu USD</span></div>
+            <div class="s4-card__desc">Tổng vốn cam kết cho danh mục ĐTRNN đến 2025.</div>
+          </div>
+          <div class="s4-card ac-reveal ac-reveal--up" style="--i:6">
+            <svg class="s4-spark" width="42" height="18" viewBox="0 0 42 18" aria-hidden="true"><path class="ac-draw" pathLength="1" style="--len:1;--i:6" d="M2,16 L10,12 L18,8 L26,5 L34,6 L40,2" fill="none" stroke="var(--pvep-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="s4-card__lbl">Algeria · sản lượng</div>
+            <div class="s4-card__val"><span data-count-to="17" data-count-dur="1400">0</span><span class="u">.000 thùng/ngày</span></div>
+            <div class="s4-card__desc">Dự án Lô 433a&amp;416b — dòng tiền ổn định, đã thu hồi vốn.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s4-ribbon">
+        <span class="s4-pill">Trong nước</span>
+        <span class="s4-pill">Nước ngoài</span>
+        <span class="s4-pill">An ninh năng lượng</span>
+        <span class="s4-pill">Bổ sung trữ lượng</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 5 — Khung 3 cấp vướng mắc ========================= -->
+<section class="slide" data-chapter="1">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">PHẦN 2 · VƯỚNG MẮC ĐTRNN 2020 – 2025</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Phân tầng vướng mắc theo <span class="big4 glow">3</span> cấp</h2>
+    </div>
+    <div class="cards cards--3">
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:2; border-top:4px solid var(--danger);">
+        <div class="card4__ic" style="background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(234,88,12,.13)); color:var(--danger);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h4>Cấp Bộ / Chính phủ / Quốc hội</h4>
+        <ul class="dlist dlist--bad">
+          <li>Khoảng cách Luật Đầu tư – Luật QLV Nhà nước – đặc thù dầu khí.</li>
+          <li>Thiếu cơ chế riêng cho dự án E&amp;P nước ngoài.</li>
+          <li>Vướng mắc về GCNĐKĐTRNN, chuyển lợi nhuận, ngoại hối.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:3; border-top:4px solid var(--warning);">
+        <div class="card4__ic" style="background:linear-gradient(135deg,rgba(234,88,12,.15),rgba(217,119,6,.13)); color:var(--warning);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V9l4-3 4 3v11"/><path d="M13 20v-7l4-3 4 3v7"/></svg></div>
+        <h4>Cấp Petrovietnam</h4>
+        <ul class="dlist">
+          <li>Hạn mức ủy quyền 800 tỷ VND (~31 triệu USD) – chưa tương xứng.</li>
+          <li>Quy chế cho vay, quản lý vốn ĐTRNN còn vướng.</li>
+          <li>Thời gian thẩm định kéo dài, phối hợp Bộ ngành chưa thông suốt.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:4; border-top:4px solid var(--pvep-blue);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/></svg></div>
+        <h4>Cấp PVEP</h4>
+        <ul class="dlist">
+          <li>Năng lực tài chính chưa đủ cạnh tranh IOC/NOC quốc tế.</li>
+          <li>Thiếu nhân sự thông thạo địa bàn nước sở tại.</li>
+          <li>Hạn chế trong làm chủ công nghệ đặc thù (sub-salt, đá móng).</li>
+        </ul>
+      </div>
+    </div>
+    <p class="punch ac-reveal ac-reveal--up" style="--i:6;--ac-delay:400ms; max-width:60ch; margin-top:1.2rem;">Mỗi tầng vướng mắc → một thẩm quyền giải quyết riêng.</p>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 6 — Vướng mắc cấp Bộ / Chính phủ ========================= -->
+<section class="slide" data-chapter="1">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Cấp Bộ / Chính phủ / Quốc hội</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Khoảng lệch <span class="neo glow">pháp luật VN</span> &amp; thông lệ dầu khí quốc tế</h2>
+    </div>
+    <div class="ksnb">
+      <div class="ksnb__diagram">
+        <div class="ks-node ks-node--top ac-pop" style="--i:2">Luật VN</div>
+        <svg class="ks-link" viewBox="0 0 40 120" preserveAspectRatio="none" aria-hidden="true">
+          <path class="ac-draw" pathLength="1" style="--len:1;--i:3" d="M20,4 L20,116" fill="none" stroke="var(--pvep-blue)" stroke-width="3"/>
+        </svg>
+        <div class="ks-node ks-node--bot ac-pop" style="--i:4">PSC quốc tế</div>
+      </div>
+      <ul class="ks-list">
+        <li class="ac-reveal ac-reveal--right" style="--i:5">Luật Đầu tư &amp; Luật Quản lý vốn Nhà nước chưa phản ánh đặc thù dầu khí</li>
+        <li class="ac-reveal ac-reveal--right" style="--i:6">Thiếu cơ chế riêng cho dự án E&amp;P ngoài lãnh thổ Việt Nam</li>
+        <li class="ac-reveal ac-reveal--right" style="--i:7">Thẩm quyền điều chỉnh GCNĐKĐTRNN còn cứng nhắc theo từng lần</li>
+        <li class="ac-reveal ac-reveal--right" style="--i:8">Nghĩa vụ chuyển lợi nhuận về nước &amp; quản lý ngoại hối chưa linh hoạt</li>
+      </ul>
+    </div>
+    <svg class="ecg" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true"><path class="ac-draw" style="--len:1;--i:9" pathLength="1" d="M0,30 H120 l14,-22 l16,44 l14,-22 H300 l14,-26 l16,52 l14,-26 H540 l20,-14 l20,14 H600" fill="none" stroke="var(--pvep-blue)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 7 — Vướng mắc cấp Petrovietnam ========================= -->
+<section class="slide" data-chapter="1">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Cấp Petrovietnam · Quản trị Tập đoàn</div>
+      <h2 class="s-title ac-reveal" style="--i:1" style="margin-bottom:1rem;">Hạn mức &amp; quy chế chưa theo kịp <span class="neo">quy mô dự án</span></h2>
+    </div>
+    <div class="domino" style="align-items:center;">
+      <div class="dom ac-reveal ac-reveal--left" style="--i:1; background:var(--white); border:2px solid var(--pvep-blue); position:relative;">
+        <div style="position:absolute; top:-24px; left:24px; background:var(--pvep-blue); color:#fff; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,131,199,0.3);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <span class="dom__k" style="margin-top:16px;">Hạn mức ủy quyền</span>
+        <ul class="dlist">
+          <li>800 tỷ VND (~31 triệu USD) – nhỏ so với quy mô dự án E&amp;P.</li>
+          <li>Mỗi điều chỉnh nhỏ trong tiểu dự án phải trình lại Petrovietnam.</li>
+          <li>Mất thời gian, lỡ cơ hội thương mại quốc tế.</li>
+        </ul>
+      </div>
+      <div class="dom__arr ac-pop" style="--i:2; color:var(--pvep-blue); background:rgba(0,131,199,0.1); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="dom ac-reveal ac-reveal--left" style="--i:3; background:var(--white); border:2px solid var(--warning); position:relative;">
+        <div style="position:absolute; top:-24px; left:24px; background:var(--warning); color:#fff; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(234,88,12,0.3);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
+        <span class="dom__k" style="margin-top:16px;">Quy chế nội bộ</span>
+        <ul class="dlist">
+          <li>Quy chế cho vay, quản lý vốn ĐTRNN còn vướng nhiều chỗ.</li>
+          <li>Quy trình thẩm định kéo dài, nhiều cấp tham gia.</li>
+          <li>Cơ chế phối hợp với Bộ ngành chưa thông suốt, một chiều.</li>
+        </ul>
+      </div>
+      <div class="dom__arr ac-pop" style="--i:4; color:var(--danger); background:rgba(220,38,38,0.1); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="dom dom--bad ac-reveal ac-reveal--left" style="--i:5; background:var(--white); border:2px solid var(--danger); position:relative;">
+        <div style="position:absolute; top:-24px; left:24px; background:var(--danger); color:#fff; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(220,38,38,0.3);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <span class="dom__k" style="margin-top:16px;">Hệ quả</span>
+        <ul class="dlist dlist--bad">
+          <li>PVEP mất cơ hội cạnh tranh với IOC/NOC quốc tế.</li>
+          <li>Quyết định đầu tư chậm – không bắt kịp cửa sổ thương mại.</li>
+          <li>Khó mở rộng danh mục ĐTRNN giai đoạn mới.</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote class="punch ac-reveal ac-reveal--up" style="--i:7;--ac-delay:500ms">"Cơ hội dầu khí quốc tế không chờ thủ tục nội bộ."</blockquote>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 8 — Vướng mắc cấp PVEP ========================= -->
+<section class="slide" data-chapter="1">
+  <div class="ambient" aria-hidden="true"><span class="orb orb--1 ac-drift"></span><span class="grid-glow"></span></div>
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Cấp PVEP · Năng lực &amp; nguồn lực</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Khoảng cách <span class="neo">PVEP</span> &amp; <span class="neo-g">IOC/NOC quốc tế</span></h2>
+    </div>
+    <div class="ba">
+      <div class="ba__side ba__before ac-reveal ac-reveal--left" style="--i:2">
+        <span class="ba__lbl ba__lbl--old">Năng lực hiện tại của PVEP</span>
+        <div class="doc-stack"><span class="doc ac-float"></span><span class="doc"></span><span class="doc"></span></div>
+        <ul class="ba__pts">
+          <li>Vốn tự có nhỏ so với các IOC/NOC khu vực</li>
+          <li>Nhân sự thông thạo địa bàn nước sở tại còn mỏng</li>
+          <li>Hạn chế dự báo giá dầu &amp; rủi ro địa chính trị</li>
+          <li>Chưa làm chủ công nghệ sub-salt, asphaltenic, đá móng</li>
+        </ul>
+      </div>
+      <div class="ba__mid ac-pop" style="--i:3"><div class="ba__arrow">KHOẢNG CÁCH</div></div>
+      <div class="ba__side ba__after ac-reveal ac-reveal--right" style="--i:4">
+        <span class="ba__lbl ba__lbl--new">Chuẩn quốc tế (IOC/NOC)</span>
+        <div class="mini-dash">
+          <div class="md-bars">
+            <span class="md-bar ac-bar" style="--h:50%;--i:0"></span>
+            <span class="md-bar ac-bar" style="--h:80%;--i:1"></span>
+            <span class="md-bar ac-bar" style="--h:62%;--i:2"></span>
+            <span class="md-bar ac-bar" style="--h:95%;--i:3"></span>
+          </div>
+          <svg class="md-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="md-track" cx="50" cy="50" r="40"/><circle class="md-val ac-ring-val" cx="50" cy="50" r="40" style="--circ:251.3;--p:.78;--i:4"/></svg>
+        </div>
+        <ul class="ba__pts ba__pts--g">
+          <li>Tiềm lực tài chính dồi dào, dự phòng rủi ro lớn</li>
+          <li>Mạng lưới chuyên gia địa bàn rộng khắp</li>
+          <li>Làm chủ công nghệ khai thác phức tạp</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 9 — Tự phê Petrovietnam ========================= -->
+<section class="slide" data-chapter="1">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Tự phê · Vướng mắc của Petrovietnam</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Petrovietnam nhìn thẳng <span class="neo">vai trò chủ sở hữu vốn</span></h2>
+    </div>
+    <div class="duo duo--2">
+      <div class="duo__card ac-reveal ac-reveal--left" style="--i:2">
+        <h3>Điểm chưa làm tốt</h3>
+        <ul class="dlist" style="margin-top:.8rem;">
+          <li>Chưa kịp thời ban hành cơ chế đặc thù cho ĐTRNN.</li>
+          <li>Hạn mức ủy quyền chưa được điều chỉnh tương xứng quy mô.</li>
+          <li>Cơ chế phối hợp với Bộ ngành – Đại sứ quán còn rời rạc.</li>
+          <li>Vai trò "đầu mối chính sách" chưa rõ ràng trong quy chế nội bộ.</li>
+        </ul>
+      </div>
+      <div class="duo__card duo__card--g ac-reveal ac-reveal--right" style="--i:3">
+        <h3>Hướng cải thiện</h3>
+        <ul class="dlist dlist--g" style="margin-top:.8rem;">
+          <li>Chủ động kiến nghị sửa cơ chế lên Chính phủ &amp; Bộ ngành.</li>
+          <li>Tái phân cấp ủy quyền theo nguyên tắc kiểm soát rủi ro.</li>
+          <li>Thiết lập kênh phối hợp Petrovietnam – PVEP – MOFA xuyên suốt.</li>
+          <li>Định vị rõ: Petrovietnam = đầu mối chính sách, PVEP = đầu mối triển khai.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note note--info ac-reveal" style="--i:6">Tự phê minh bạch → tăng tính khách quan &amp; thuyết phục cấp có thẩm quyền.</p>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 10 — Petrovietnam & PVEP đã làm được gì ========================= -->
+<section class="slide" data-chapter="2">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">PHẦN 3 · KẾT QUẢ 2020 – 2025</div>
+      <h2 class="s-title ac-reveal" style="--i:1">04 nhóm kết quả <span class="neo">đã hiện thực hóa</span></h2>
+    </div>
+    <div class="org">
+      <div class="org__node org__root ac-pop" style="--i:2">Hoạt động ĐTRNN 2020 – 2025</div>
+      <div class="org__children">
+        <div class="org__node ac-pop" style="--i:3">Duy trì dòng tiền</div>
+        <div class="org__node ac-pop" style="--i:4">Thoái vốn – cắt lỗ</div>
+        <div class="org__node ac-pop" style="--i:5">Giữ pháp lý dự án</div>
+        <div class="org__node ac-pop" style="--i:6">Mở pipeline mới</div>
+      </div>
+    </div>
+    <div class="map-row">
+      <span class="map-chip map-chip--a ac-reveal" style="--i:7">↳ Algeria 17.000 thùng/ngày</span>
+      <span class="map-chip map-chip--b ac-reveal" style="--i:8">↳ 07 dự án thoái vốn</span>
+      <span class="map-chip map-chip--c ac-reveal" style="--i:9">↳ 05 thỏa thuận hợp tác 2025</span>
+    </div>
+    <div class="wb-flags">
+      <span class="flag flag--warn ac-pop ac-pulse" style="--i:10">CV 3028/TDKT-TCĐT (14/10/2025)</span>
+      <span class="flag flag--over ac-pop ac-pulse" style="--i:11">CV 1788/TDKT-TCĐT (12/6/2025)</span>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 11 — Algeria · dòng tiền điển hình ========================= -->
+<section class="slide" data-chapter="2">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Algeria – Lô 433a&amp;416b · điển hình ĐTRNN sinh dòng tiền</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Dự án <span class="neo-g">đã thu hồi vốn</span> &amp; chuyển lợi nhuận về nước</h2>
+    </div>
+    <div class="steps5">
+      <div class="s5-track"><span class="s5-fill ac-fill-x" style="--w:100%"></span></div>
+      <div class="s5">
+        <div class="s5__step ac-pop" style="--i:2"><b>1</b><span>17.000 thùng/ngày sản lượng ổn định</span></div>
+        <div class="s5__step ac-pop" style="--i:3"><b>2</b><span>Doanh thu tổng 833,73 triệu USD</span></div>
+        <div class="s5__step ac-pop" style="--i:4"><b>3</b><span>Doanh thu lũy kế 658,73 triệu USD</span></div>
+        <div class="s5__step ac-pop" style="--i:5"><b>4</b><span>Chuyển về nước 685,58 triệu USD</span></div>
+        <div class="s5__step s5__step--hot ac-pop" style="--i:6"><b>5</b><span>Tỷ lệ chuyển về nước &gt; 82% doanh thu</span></div>
+      </div>
+    </div>
+    <div class="ai-note" style="background:rgba(0,176,80,.08); border-color:rgba(0,176,80,.4);">
+      <span class="ai-note__txt" style="text-align:center; width:100%;"><b style="color:var(--pvep-green);">Bài học:</b> Khi cơ chế thông suốt &amp; dự án được giám sát chặt → ĐTRNN sinh dòng tiền thực, mang ngoại tệ về Việt Nam.</span>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 12 — 05 Thỏa thuận hợp tác chiến lược ========================= -->
+<section class="slide" data-chapter="2">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Mở pipeline cơ hội mới · 2025</div>
+      <h2 class="s-title ac-reveal" style="--i:1"><span class="neo">05</span> Thỏa thuận hợp tác chiến lược</h2>
+    </div>
+    <div class="cards cards--3" style="margin-top:1rem;">
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:2; border-top:4px solid var(--pvep-blue);">
+        <h4>KazMunayGas (Kazakhstan)</h4>
+        <p>Mở địa bàn Trung Á · NOC quốc gia dầu khí lớn</p>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:3; border-top:4px solid var(--pvep-blue);">
+        <h4>Pertamina Hulu Energi (Indonesia)</h4>
+        <p>Mạng lưới ASEAN · tận dụng quan hệ song phương</p>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:4; border-top:4px solid var(--pvep-blue);">
+        <h4>Uzbekneftegaz (Uzbekistan)</h4>
+        <p>Trung Á thứ 2 · đa dạng hóa địa bàn</p>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:5; border-top:4px solid var(--pvep-green);">
+        <h4>EGPC (Ai Cập)</h4>
+        <p>Trung Đông &amp; Bắc Phi · pipeline chiến lược</p>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:6; border-top:4px solid var(--pvep-green);">
+        <h4>Sonangol (Angola)</h4>
+        <p>Châu Phi · kế thừa kinh nghiệm Algeria</p>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:7; border-top:4px solid var(--warning); background:rgba(234,88,12,.05);">
+        <h4>Pipeline kỳ vọng</h4>
+        <p>Mở 2–3 cơ hội mới · sàng lọc qua bộ tiêu chí Petrovietnam</p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 13 — Đề xuất với Bộ / Chính phủ ========================= -->
+<section class="slide" data-chapter="3">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">PHẦN 4 · ĐỀ XUẤT 2026 – 2030 · Cấp Bộ / Chính phủ</div>
+      <h2 class="s-title ac-reveal" style="--i:1"><span class="neo">Petrovietnam</span> làm đầu mối kiến nghị · 04 nội dung trọng tâm</h2>
+    </div>
+    <div class="cards cards--3" style="position:relative;">
+      <!-- Dashed connecting line -->
+      <svg class="ac-reveal" style="--i:1; position:absolute; top:28px; left:15%; width:70%; height:40px; z-index:0; overflow:visible; display:none;" preserveAspectRatio="none">
+        <path d="M0,0 L300,0 L600,0" stroke="var(--pvep-blue)" stroke-width="2" stroke-dasharray="6 6" fill="none" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <style>@media(min-width:768px){.cards--3 > svg{display:block;}}</style>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:2; position:relative; z-index:1; border-top:4px solid var(--pvep-blue); background:rgba(255,255,255,0.95); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+        <div class="card4__ic" style="background:var(--pvep-blue); color:#fff; border-radius:50%; width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div>
+        <h4 style="text-align:center; color:var(--pvep-blue); margin-bottom:12px;">Nghị định riêng E&amp;P</h4>
+        <ul class="dlist">
+          <li>Ban hành cơ chế đặc thù dầu khí ngoài lãnh thổ Việt Nam.</li>
+          <li>Song song Nghị định hướng dẫn Luật Đầu tư 2025.</li>
+          <li>Giải quyết tận gốc khoảng lệch pháp lý.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:3; position:relative; z-index:1; border-top:4px solid var(--pvep-green); background:rgba(255,255,255,0.95); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+        <div class="card4__ic" style="background:var(--pvep-green); color:#fff; border-radius:50%; width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 12h14M5 7l7-5 7 5M5 17l7 5 7-5"/></svg></div>
+        <h4 style="text-align:center; color:var(--pvep-green); margin-bottom:12px;">Chuyển tiền theo tiến độ</h4>
+        <ul class="dlist">
+          <li>Cho phép chuyển tiền ra nước ngoài theo tiến độ hợp đồng.</li>
+          <li>Không phải điều chỉnh GCNĐKĐTRNN từng lần.</li>
+          <li>Giảm rào cản thủ tục hành chính cho dự án.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:4; position:relative; z-index:1; border-top:4px solid var(--warning); background:rgba(255,255,255,0.95); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+        <div class="card4__ic" style="background:var(--warning); color:#fff; border-radius:50%; width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4 style="text-align:center; color:var(--warning); margin-bottom:12px;">Cost recovery quốc tế</h4>
+        <ul class="dlist dlist--g">
+          <li>Thu hồi chi phí từ doanh thu bán dầu khí trong dòng tiền dự án.</li>
+          <li>Phù hợp thông lệ PSC quốc tế.</li>
+          <li>Cho phép chỉ định nhà thầu khi hợp tác đối tác đã được cấp phép.</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 14 — Nâng hạn mức ủy quyền ========================= -->
+<section class="slide" data-chapter="3">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Cấp Petrovietnam · Đề xuất nâng hạn mức ủy quyền</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Từ <span class="neo">800 tỷ</span> → <span class="neo-g">4.600 tỷ VND</span></h2>
+    </div>
+    <div class="duo duo--2">
+      <div class="duo__card ac-reveal ac-reveal--left" style="--i:2">
+        <h3>Hiện tại</h3>
+        <p style="font-size:1.6rem; font-weight:800; color:var(--danger); margin:.6rem 0;">800 tỷ VND<br/><span style="font-size:1rem; color:var(--ink-500); font-weight:500;">~ 31 triệu USD</span></p>
+        <ul class="dlist dlist--bad" style="margin-top:.5rem;">
+          <li>Chưa tương xứng quy mô dự án E&amp;P quốc tế.</li>
+          <li>Mọi điều chỉnh nhỏ phải trình lại HĐTV Petrovietnam.</li>
+        </ul>
+      </div>
+      <div class="duo__card duo__card--g ac-reveal ac-reveal--right" style="--i:3">
+        <h3>Đề xuất</h3>
+        <p style="font-size:1.6rem; font-weight:800; color:var(--pvep-green); margin:.6rem 0;">4.600 tỷ VND<br/><span style="font-size:1rem; color:var(--ink-500); font-weight:500;">~ 177 triệu USD · 5,5% VĐL PVEP</span></p>
+        <ul class="dlist dlist--g" style="margin-top:.5rem;">
+          <li>Áp dụng cho tiểu dự án trong dự án đã được phê duyệt.</li>
+          <li>HĐTV Petrovietnam duyệt chủ trương · HĐTV PVEP duyệt trong hạn mức.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="benefits">
+      <span class="ben ac-pop" style="--i:5">Vẫn trong ngưỡng kiểm soát</span>
+      <span class="ben ac-pop" style="--i:6">Phân tầng thẩm quyền rõ</span>
+      <span class="ben ac-pop" style="--i:7">Báo cáo cấp có thẩm quyền</span>
+      <span class="ben ac-pop" style="--i:8">Rút ngắn thời gian quyết định</span>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 15 — Cơ chế phối hợp Petrovietnam – PVEP ========================= -->
+<section class="slide" data-chapter="3">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">Đầu mối: Ban Quản lý hợp đồng Petrovietnam</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Cơ chế phối hợp <span class="neo">Petrovietnam – PVEP</span> mới</h2>
+    </div>
+    <div class="cards cards--4" style="margin-top:.8rem;">
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:2; border-top:4px solid var(--pvep-blue);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M14 14h4a4 4 0 0 1 4 4v3"/></svg></div>
+        <h4>Hội đồng tư vấn ĐTRNN</h4>
+        <ul class="dlist">
+          <li>Cấp Tập đoàn · có KSNB, TCĐT, CL&amp;QTRR, PVEP.</li>
+          <li>Sàng lọc cơ hội theo bộ tiêu chí chuẩn.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:3; border-top:4px solid var(--pvep-blue);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h4>Bộ tiêu chí sàng lọc</h4>
+        <ul class="dlist">
+          <li>Dự thảo tại CV 86/CVNB-HXD (20/3/2026).</li>
+          <li>Áp dụng từ Q3/2026.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:4; border-top:4px solid var(--warning);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4>Quy trình "fast-track"</h4>
+        <ul class="dlist">
+          <li>Cơ hội thời hạn ngắn (&lt;90 ngày) · rút gọn còn 45 ngày.</li>
+          <li>Tiền kiểm bằng KSNB &amp; TCĐT · không hậu kiểm chồng chéo.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:5; border-top:4px solid var(--pvep-green);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14.5 14.5 0 0 1 0 20"/></svg></div>
+        <h4>Đầu mối ngoại giao kinh tế</h4>
+        <ul class="dlist dlist--g">
+          <li>Petrovietnam hỗ trợ PVEP qua kênh Đại sứ quán.</li>
+          <li>Hợp tác MOFA cho thông tin pháp lý nước sở tại.</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 16 — Đề xuất nội tại PVEP ========================= -->
+<section class="slide" data-chapter="3">
+  <div class="slide-content"><div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow ac-reveal" style="--i:0">PVEP chủ trì · Petrovietnam giám sát</div>
+      <h2 class="s-title ac-reveal" style="--i:1">Đề xuất <span class="neo">nội tại PVEP</span> · 03 trụ cột</h2>
+    </div>
+    <div class="cards cards--3" style="margin-top:1rem;">
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:2; border-top:4px solid var(--pvep-blue);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M3 21v-2a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v2"/></svg></div>
+        <h4>Nâng cao năng lực nhân sự</h4>
+        <ul class="dlist">
+          <li>Luân chuyển 2 chiều trong nước / nước ngoài.</li>
+          <li>Đào tạo địa bàn trọng điểm (Trung Á, Bắc Phi, ASEAN).</li>
+          <li>Xây dựng đội ngũ chuyên gia ĐTRNN dài hạn.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:3; border-top:4px solid var(--pvep-green);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div>
+        <h4>Hoàn thiện Quy định quản lý ĐTRNN</h4>
+        <ul class="dlist">
+          <li>QĐ 1189/QĐ-TDKT (19/6/2025) – bổ sung khung QTRR.</li>
+          <li>Quy trình ra quyết định nhanh, có truy vết.</li>
+          <li>Tăng tính chủ động cho PVEP trong khuôn khổ ủy quyền.</li>
+        </ul>
+      </div>
+      <div class="card4 ac-reveal ac-reveal--zoom" style="--i:4; border-top:4px solid var(--warning);">
+        <div class="card4__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg></div>
+        <h4>Hệ thống báo cáo điều hành ĐTRNN</h4>
+        <ul class="dlist dlist--g">
+          <li>Báo cáo HĐTV Petrovietnam hằng quý.</li>
+          <li>Minh bạch tiến độ, dòng tiền, rủi ro.</li>
+          <li>Một đầu mối chịu trách nhiệm duy nhất.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note note--info ac-reveal" style="--i:6;margin-top:1rem;">Nguyên tắc: Mỗi vướng mắc → 1 đầu mối giải quyết → 1 mốc thời gian. Tránh đề xuất "treo".</p>
+  </div></div>
+</section>
+
+<!-- ========================= SLIDE 17 — Conclusion ========================= -->
+<section class="slide" data-chapter="4">
+  <div class="ambient" aria-hidden="true"><span class="orb orb--1 ac-drift"></span><span class="orb orb--2 ac-drift"></span><span class="grid-glow"></span></div>
+  <div class="slide-content"><div class="wrap" style="text-align:center">
+    <p class="end__lead">ĐTRNN <b>không phải lựa chọn</b> – là điều kiện cần để Petrovietnam giữ vai trò Tập đoàn năng lượng quốc gia.</p>
+    <h2 class="end__big flash ac-reveal" style="--i:3; font-size:clamp(1.5rem,4.5vw,3.2rem); line-height: 1.4;">Petrovietnam: Đầu mối chính sách<br>PVEP: Đầu mối triển khai</h2>
+    <div class="end__thanks ac-reveal" style="--i:5">Trân trọng cảm ơn — Đoàn Thái Dương · Ban QLHĐ Petrovietnam · 2026</div>
+    <span class="shock"></span><span class="shock shock--2"></span>
+    <div class="sparks">
+      <span class="spark" style="--dx:-220px;--dy:-150px"></span>
+      <span class="spark" style="--dx:210px;--dy:-170px"></span>
+      <span class="spark" style="--dx:-260px;--dy:90px"></span>
+      <span class="spark" style="--dx:250px;--dy:120px"></span>
+      <span class="spark" style="--dx:-120px;--dy:-220px"></span>
+      <span class="spark" style="--dx:140px;--dy:-210px"></span>
+      <span class="spark" style="--dx:-300px;--dy:-40px"></span>
+      <span class="spark" style="--dx:300px;--dy:-30px"></span>
+      <span class="spark" style="--dx:-60px;--dy:200px"></span>
+      <span class="spark" style="--dx:80px;--dy:210px"></span>
+    </div>
+  </div></div>
+</section>
+
+<script>
+/* =====================================================================
+   activate.js  (animated-components — included in full)
+   Adds .ac-on when a slide is visible; runs count-up; replays on entry.
+   ===================================================================== */
+(function () {
+  "use strict";
+  var SLIDE_SELECTOR = ".slide";
+  var VISIBLE_RATIO  = 0.55;
+  var reduceMotion   = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  function formatNum(v, decimals){ return Number(v).toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }); }
+  function runCount(el){
+    var to = parseFloat(el.getAttribute("data-count-to")); if (isNaN(to)) return;
+    var from = parseFloat(el.getAttribute("data-count-from")) || 0;
+    var dur = parseFloat(el.getAttribute("data-count-dur")) || 1400;
+    var decimals = parseInt(el.getAttribute("data-count-decimals") || "0", 10);
+    var prefix = el.getAttribute("data-count-prefix") || "";
+    var suffix = el.getAttribute("data-count-suffix") || "";
+    if (reduceMotion){ el.textContent = prefix + formatNum(to, decimals) + suffix; return; }
+    var start = null; if (el._raf) cancelAnimationFrame(el._raf);
+    function step(ts){ if (start === null) start = ts; var p = Math.min((ts - start) / dur, 1);
+      var v = from + (to - from) * easeOutCubic(p); el.textContent = prefix + formatNum(v, decimals) + suffix;
+      if (p < 1) el._raf = requestAnimationFrame(step); }
+    el._raf = requestAnimationFrame(step);
+  }
+  function resetCount(el){
+    if (el._raf) cancelAnimationFrame(el._raf);
+    var from = parseFloat(el.getAttribute("data-count-from")) || 0;
+    var decimals = parseInt(el.getAttribute("data-count-decimals") || "0", 10);
+    var prefix = el.getAttribute("data-count-prefix") || "";
+    var suffix = el.getAttribute("data-count-suffix") || "";
+    el.textContent = prefix + formatNum(from, decimals) + suffix;
+  }
+  function activate(slide){ if (slide.classList.contains("ac-on")) return; slide.classList.add("ac-on");
+    var nums = slide.querySelectorAll("[data-count-to]"); for (var i=0;i<nums.length;i++) runCount(nums[i]); }
+  function deactivate(slide){ slide.classList.remove("ac-on");
+    var nums = slide.querySelectorAll("[data-count-to]"); for (var i=0;i<nums.length;i++) resetCount(nums[i]); }
+  function init(){
+    var slides = document.querySelectorAll(SLIDE_SELECTOR); if (!slides.length) return;
+    var allNums = document.querySelectorAll("[data-count-to]"); for (var n=0;n<allNums.length;n++) resetCount(allNums[n]);
+    if (!("IntersectionObserver" in window)){ for (var k=0;k<slides.length;k++) activate(slides[k]); return; }
+    var io = new IntersectionObserver(function (entries){
+      entries.forEach(function (e){ if (e.isIntersecting && e.intersectionRatio >= VISIBLE_RATIO) activate(e.target); else deactivate(e.target); });
+    }, { threshold: [0, VISIBLE_RATIO, 1] });
+    for (var s=0;s<slides.length;s++) io.observe(slides[s]);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+
+/* =====================================================================
+   Deck controller — chapter rail, slide counter, progress, keyboard nav
+   ===================================================================== */
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total  = slides.length;
+  var railItems = Array.prototype.slice.call(document.querySelectorAll(".rail__item"));
+  var curEl = document.getElementById("cur");
+  var totEl = document.getElementById("tot");
+  var fill  = document.getElementById("progressFill");
+  var current = 0;
+  totEl.textContent = total;
+
+  function setCurrent(i){
+    current = Math.max(0, Math.min(total - 1, i));
+    curEl.textContent = current + 1;
+    fill.style.width = ((current + 1) / total * 100) + "%";
+    var ch = slides[current].getAttribute("data-chapter");
+    railItems.forEach(function(el){ el.classList.toggle("is-active", el.getAttribute("data-chapter") === ch); });
+  }
+  function goTo(i){
+    var t = Math.max(0, Math.min(total - 1, i));
+    slides[t].scrollIntoView({ behavior: "smooth", block: "start" });
+    setCurrent(t);
+  }
+  // Track the slide currently in view (covers manual scroll / swipe)
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio >= 0.55){
+        var idx = slides.indexOf(e.target); if (idx >= 0) setCurrent(idx);
+      }
+    });
+  }, { threshold: [0.55] });
+  slides.forEach(function(s){ io2.observe(s); });
+
+  document.addEventListener("keydown", function(e){
+    if (["ArrowRight","ArrowDown","PageDown"," "].indexOf(e.key) !== -1){ e.preventDefault(); goTo(current + 1); }
+    else if (["ArrowLeft","ArrowUp","PageUp"].indexOf(e.key) !== -1){ e.preventDefault(); goTo(current - 1); }
+    else if (e.key === "Home"){ e.preventDefault(); goTo(0); }
+    else if (e.key === "End"){ e.preventDefault(); goTo(total - 1); }
+  });
+  railItems.forEach(function(el){
+    el.addEventListener("click", function(){ goTo(parseInt(el.getAttribute("data-target"), 10)); });
+  });
+  setCurrent(0);
+})();
+
+/* =====================================================================
+   Typewriter for the hero tagline (proportional-font safe)
+   ===================================================================== */
+(function(){
+  function type(el){
+    var full = el.getAttribute("data-text"), i = 0; el.textContent = "";
+    el.classList.add("ac-caret");
+    (function tick(){ if (i <= full.length){ el.textContent = full.slice(0, i++); setTimeout(tick, 34); }
+      else { setTimeout(function(){ el.classList.remove("ac-caret"); }, 1200); } })();
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting){ type(e.target); } else { e.target.textContent = ""; } });
+  }, { threshold: .6 });
+  document.querySelectorAll(".jtype").forEach(function(el){ io.observe(el); });
+})();
+
+/* =====================================================================
+   Global data-particle network (professional ambient — all slides)
+   ===================================================================== */
+(function(){
+  var c = document.getElementById("oilParticles"); if (!c) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var x = c.getContext("2d"), P = [], W, H, N;
+  function mk(){ return { x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.16, vy:(Math.random()-.5)*.16, r:Math.random()*1.7+.5 }; }
+  function size(){ W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; N = Math.max(28, Math.min(72, Math.round(W*H/26000))); P = []; for (var i=0;i<N;i++) P.push(mk()); }
+  function loop(){
+    x.clearRect(0,0,W,H);
+    for (var i=0;i<P.length;i++){ var p=P[i]; p.x+=p.vx; p.y+=p.vy;
+      if (p.x<0||p.x>W) p.vx*=-1; if (p.y<0||p.y>H) p.vy*=-1;
+      x.beginPath(); x.fillStyle="rgba(0,131,199,.32)"; x.arc(p.x,p.y,p.r,0,7); x.fill();
+    }
+    for (var a=0;a<P.length;a++){ for (var b=a+1;b<P.length;b++){
+      var dx=P[a].x-P[b].x, dy=P[a].y-P[b].y, d=dx*dx+dy*dy;
+      if (d<16000){ x.strokeStyle="rgba(10,42,74,"+(0.11*(1-d/16000))+")"; x.lineWidth=1;
+        x.beginPath(); x.moveTo(P[a].x,P[a].y); x.lineTo(P[b].x,P[b].y); x.stroke(); }
+    } }
+    requestAnimationFrame(loop);
+  }
+  size(); loop();
+  window.addEventListener("resize", size);
+})();
+</script>
+</body>
+</html>
