@@ -560,6 +560,134 @@ body{
   0%, 100% { opacity: 0.2; }
   50% { opacity: 1; }
 }
+
+/* ============================================================
+   MOBILE / PORTRAIT PHONE MODE
+   Khi xem trên điện thoại (màn hình dọc): chuyển bố cục slide
+   sang dạng một cột, scale chữ theo chiều rộng, cho phép slide
+   dài cuộn được và "vuốt để chuyển slide".
+   ============================================================ */
+@media (max-width: 768px), (max-width: 920px) and (orientation: portrait) {
+
+  /* ---- Cuộn dọc kiểu điện thoại: vuốt để chuyển slide ----
+     proximity + snap-align để mỗi lần vuốt dừng đúng 1 slide,
+     nhưng slide nhiều nội dung vẫn cuộn xem hết được. */
+  html{ scroll-snap-type: y proximity; }
+  body{ overflow-x: hidden; }
+
+  .slide{
+    width: 100vw;
+    height: auto;
+    min-height: 100vh; min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .slide-content{
+    justify-content: flex-start;
+    min-height: 100vh; min-height: 100svh;
+    max-height: none;
+    overflow: visible;
+    padding: clamp(3.2rem, 9vh, 4.4rem) clamp(1rem, 5vw, 1.5rem) clamp(2.6rem, 7vh, 3.4rem);
+    padding-left: clamp(1rem, 5vw, 1.5rem) !important; /* huỷ offset rail trên desktop */
+  }
+
+  /* ---- Token chữ/khoảng cách: bám theo chiều RỘNG (vw) thay vì vh ---- */
+  :root{
+    --title-size: clamp(1.5rem, 6.6vw, 2.4rem);
+    --h2-size:    clamp(1.25rem, 5.4vw, 2rem);
+    --h3-size:    clamp(1.1rem, 4.6vw, 1.6rem);
+    --body-size:  clamp(0.95rem, 3.7vw, 1.18rem);
+    --small-size: clamp(0.82rem, 3.1vw, 1.02rem);
+    --slide-padding: clamp(1rem, 5vw, 1.6rem);
+    --content-gap: clamp(0.7rem, 3vw, 1.2rem);
+    --element-gap: clamp(0.4rem, 2vw, 0.8rem);
+  }
+  .s-title{ font-size: clamp(1.45rem, 6.4vw, 2.3rem); }
+  .head-center{ margin-bottom: clamp(.7rem, 3vw, 1.2rem); }
+
+  /* ---- Mọi bố cục nhiều cột → một cột dọc ---- */
+  .two-view,
+  .tri,
+  .ba,
+  .ksnb,
+  .duo,
+  .duo--2,
+  .quad4a,
+  .cards--4,
+  .cards--3,
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: clamp(.7rem, 3vw, 1.1rem);
+  }
+
+  /* Mũi tên/giải phân cách ngang → xoay xuống cho hợp chiều dọc */
+  .two-view .tv-mid{ transform: rotate(90deg); font-size: 1.9rem; padding: .1rem 0; }
+  .ba__arrow{ transform: rotate(90deg); }
+  .duo__plus{ flex-direction: row; gap: .5rem; }
+
+  /* KSNB: sơ đồ + danh sách xếp dọc */
+  .ksnb{ align-items: stretch; }
+  .ksnb__diagram{ margin-bottom: .4rem; }
+
+  /* ---- Domino (5 ô ngang) → cột, mũi tên chỉ xuống ---- */
+  .domino{
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: .55rem;
+  }
+  .domino:hover .dom{ transform: none; opacity: 1; filter: none; }
+  .dom__arr{ transform: rotate(90deg); justify-content: center; }
+
+  /* ---- Timeline 5 bước → mốc dọc ---- */
+  .steps5{ padding: .4rem 0; }
+  .s5-track{ display: none; }
+  .s5{ flex-direction: column; align-items: stretch; gap: .9rem; }
+  .s5__step{
+    flex-direction: row;
+    align-items: center;
+    gap: .9rem;
+    text-align: left;
+  }
+  .s5__step b{ flex: none; }
+  .s5__step span{ max-width: none; text-align: left; }
+
+  /* ---- Cây sơ đồ công việc → xếp dọc, bỏ đường nối ngang ---- */
+  .org__children{ flex-direction: column; gap: .8rem; margin-top: 1.4rem; align-items: center; }
+  .org__children::before{ display: none; }
+  .org__children .org__node::before{ display: none; }
+
+  /* ---- Power BI iframe gọn lại ---- */
+  .pb-head{ flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .pb-frame{ height: clamp(320px, 60vh, 560px); }
+
+  /* ---- Ẩn trang trí gây tràn / chồng chữ trên màn hình hẹp ---- */
+  .oecd-wm,
+  .hero-motion-bg,
+  .govgraph{ display: none !important; }
+
+  /* Counter nhỏ gọn ở góc */
+  .counter{ top: .7rem; right: .7rem; font-size: .82rem; padding: .26rem .65rem; }
+
+  /* ---- Gợi ý vuốt (chỉ hiện trên mobile) ---- */
+  .swipe-hint{
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    z-index: 70; display: flex; flex-direction: column; align-items: center; gap: .15rem;
+    font-family: var(--font-display); font-weight: 700; letter-spacing: .04em;
+    font-size: .72rem; color: var(--pvep-blue);
+    background: rgba(255,255,255,.78); border: 1px solid rgba(0,131,199,.25);
+    padding: .4rem .9rem; border-radius: 999px;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 22px rgba(10,42,74,.12);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .swipe-hint svg{ width: 18px; height: 18px; animation: swipeUp 1.6s ease-in-out infinite; }
+  @keyframes swipeUp{ 0%,100%{ transform: translateY(3px); opacity:.55; } 50%{ transform: translateY(-3px); opacity:1; } }
+  .swipe-hint.is-hidden{ opacity: 0; transform: translate(-50%, 14px); pointer-events: none; }
+}
+
+/* Mặc định ẩn gợi ý vuốt trên desktop */
+.swipe-hint{ display: none; }
 </style>
 </head>
 <body>
@@ -635,6 +763,11 @@ body{
 <!-- slide counter -->
 <div class="counter"><span id="cur">1</span><span class="sep">/</span><span id="tot">17</span></div>
 <div class="hint">← → chuyển slide · Home/End đầu/cuối</div>
+<!-- gợi ý vuốt trên điện thoại -->
+<div class="swipe-hint" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  Vuốt để chuyển slide
+</div>
 
 <!-- ========================= SLIDE 1 — HERO ========================= -->
 <section class="slide" data-chapter="0" style="background-color: #f8fafc;">
@@ -1504,6 +1637,23 @@ body{
   }
   size(); loop();
   window.addEventListener("resize", size);
+})();
+
+/* =====================================================================
+   Mobile: ẩn gợi ý "Vuốt để chuyển slide" sau lần tương tác đầu tiên
+   ===================================================================== */
+(function(){
+  var hint = document.querySelector(".swipe-hint"); if (!hint) return;
+  var hidden = false;
+  function dismiss(){
+    if (hidden) return; hidden = true;
+    hint.classList.add("is-hidden");
+    setTimeout(function(){ hint.style.display = "none"; }, 500);
+  }
+  window.addEventListener("scroll", dismiss, { passive: true });
+  window.addEventListener("touchmove", dismiss, { passive: true });
+  // tự ẩn sau 6s nếu người dùng chưa thao tác
+  setTimeout(dismiss, 6000);
 })();
 </script>
 </body>
