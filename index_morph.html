@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Offshore Energy · Petrovietnam – PVEP</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 1 — Hero / Title -->
+  <section class="slide is-active" data-kb="kb1">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img1.jpg" alt="Giàn khoan ngoài khơi lúc hoàng hôn" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">Petrovietnam · PVEP</span>
+      <h1 class="title">Định hướng phát triển<br/>dự án E&amp;P tại nước ngoài</h1>
+      <p class="subtitle">Giai đoạn 2026 – 2030</p>
+    </div>
+  </section>
+
+  <!-- Slide 2 -->
+  <section class="slide" data-kb="kb2">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img2.jpg" alt="Giàn khai thác ngoài khơi" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">01 · Khai thác</span>
+      <h2 class="title">Khai thác ngoài khơi</h2>
+      <p class="subtitle">Mở rộng danh mục tài sản dầu khí quốc tế, gia tăng trữ lượng và sản lượng bền vững.</p>
+    </div>
+  </section>
+
+  <!-- Slide 3 -->
+  <section class="slide" data-kb="kb3">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img3.jpg" alt="Hạ tầng ngầm dưới biển" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">02 · Hạ tầng</span>
+      <h2 class="title">Hạ tầng ngầm<br/>dưới biển</h2>
+      <p class="subtitle">Công nghệ subsea, hệ thống đường ống và kết nối mỏ tối ưu chi phí vận hành.</p>
+    </div>
+  </section>
+
+  <!-- Slide 4 -->
+  <section class="slide" data-kb="kb4">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img4.jpg" alt="Điện gió ngoài khơi" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">03 · Chuyển dịch</span>
+      <h2 class="title">Chuyển dịch<br/>năng lượng</h2>
+      <p class="subtitle">Tích hợp điện gió ngoài khơi, hướng tới danh mục năng lượng phát thải thấp.</p>
+    </div>
+  </section>
+
+  <!-- Slide 5 -->
+  <section class="slide" data-kb="kb5">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img5.jpg" alt="Số hóa và giám sát thời gian thực" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">04 · Số hóa</span>
+      <h2 class="title">Giám sát<br/>thời gian thực</h2>
+      <p class="subtitle">Digital twin và dữ liệu vận hành tập trung cho quyết định nhanh, chính xác.</p>
+    </div>
+  </section>
+
+  <!-- Slide 6 -->
+  <section class="slide" data-kb="kb6">
+    <div class="slide__stage">
+      <img class="slide__img" src="assets/images/img6.jpg" alt="Tầm nhìn 2030" />
+    </div>
+    <div class="slide__overlay"></div>
+    <div class="slide__content">
+      <span class="eyebrow">05 · Tầm nhìn</span>
+      <h2 class="title">Tầm nhìn 2030</h2>
+      <p class="subtitle">Phát triển bền vững – an toàn – hiệu quả trên từng dự án quốc tế.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- UI chrome -->
+<div class="progress"><span class="progress__fill" id="progressFill"></span></div>
+
+<div class="counter">
+  <span id="cur">1</span><span class="sep">/</span><span id="total">6</span>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<button class="navbtn navbtn--prev" id="prevBtn" aria-label="Slide trước">&#8249;</button>
+<button class="navbtn navbtn--next" id="nextBtn" aria-label="Slide sau">&#8250;</button>
+
+<p class="hint">← → hoặc Space để chuyển slide</p>
+
+<script src="script.js"></script>
+</body>
+</html>
